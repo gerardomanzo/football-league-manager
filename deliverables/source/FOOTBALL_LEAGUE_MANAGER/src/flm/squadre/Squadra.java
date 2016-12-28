@@ -1,5 +1,7 @@
 package flm.squadre;
 
+import flm.utenti.Allenatore;
+
 public class Squadra {
 	private String nomeSquadra;
 	private int vittorie;
@@ -8,6 +10,7 @@ public class Squadra {
 	private int goalFatti;
 	private int goalSubiti;
 	private int statoIscrizione;
+	private Allenatore allenatore;
 	
 	static final int NESSUNA_ISCRIZIONE = 0;
 	static final int ATTESA_CONFERMA = 1;
@@ -15,9 +18,10 @@ public class Squadra {
 	static final int SQUADRA_ISCRITTA = 3;
 	
 	/**
-	 * @param nome
+	 * @param nomeSquadra
+	 * @param allenatore
 	 */
-	public Squadra(String nomeSquadra) {
+	public Squadra(String nomeSquadra, Allenatore allenatore) {
 		this.nomeSquadra = nomeSquadra;
 		this.vittorie = 0;
 		this.pareggi = 0;
@@ -25,6 +29,7 @@ public class Squadra {
 		this.goalFatti = 0;
 		this.goalSubiti = 0;
 		this.statoIscrizione = NESSUNA_ISCRIZIONE;
+		this.allenatore = allenatore;
 	}
 
 	/**
@@ -137,5 +142,12 @@ public class Squadra {
 	 */
 	public void confermaPagamento() {
 		this.statoIscrizione = SQUADRA_ISCRITTA;
+	}
+	
+	/**
+	 * @return the allenatore
+	 */
+	public Allenatore getAllenatore() {
+		return allenatore;
 	}
 }
