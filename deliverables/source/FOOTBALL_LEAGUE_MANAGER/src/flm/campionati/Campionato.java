@@ -98,7 +98,7 @@ public class Campionato {
 		Squadra[] ospite = new Squadra[numSquadre/2];
 
 		for(int i = 0; i < numSquadre/2; i++) {
-			casa [i] = iteratorSquadre.next();
+			casa[i] = iteratorSquadre.next();
 			ospite[i] = iteratorSquadre.next(); 
 		}
 
