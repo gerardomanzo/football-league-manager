@@ -107,10 +107,10 @@ public class Campionato {
 			// alterna le partite in casa e fuori
 			if(i % 2 == 0)
 				for(int j = 0; j < numSquadre /2 ; j++)
-					calendario.add(new Partita(i+1, casa[i], ospite[i]));
+					calendario.add(new Partita(i+1, casa[j], ospite[j]));
 			else
 				for(int j = 0; j < numSquadre /2 ; j++)
-					calendario.add(new Partita(i+1, ospite[i], casa[i]));
+					calendario.add(new Partita(i+1, ospite[j], casa[j]));
 
 			// salva l'elemento fisso
 			Squadra pivot = casa[0];
