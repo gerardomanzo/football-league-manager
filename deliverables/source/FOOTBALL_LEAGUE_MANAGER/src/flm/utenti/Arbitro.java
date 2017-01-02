@@ -1,6 +1,6 @@
 package flm.utenti;
 
-public class Allenatore {
+public class Arbitro {
 	private String nome;
 	private String cognome;
 	private String email;
@@ -12,13 +12,13 @@ public class Allenatore {
 	 * @param email
 	 * @param password
 	 */
-	public Allenatore(String nome, String cognome, String email, String password) {
+	public Arbitro(String nome, String cognome, String email, String password) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
 		this.password = password;
 	}
-
+	
 	/**
 	 * @return the nome
 	 */
