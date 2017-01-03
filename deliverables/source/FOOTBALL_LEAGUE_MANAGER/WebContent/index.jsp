@@ -7,15 +7,15 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-md-5 offset-md-1">
 				<div class="jumbotron jumbotron-fluid">
 					<div class="container">
-						<h1>Football League Manager</h1>
+						<h1 class="text-xs-center">Football League Manager</h1>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-4 offset-sm-1">
-				<form action="utenti" method="post">
+			<div class="col-md-4 offset-md-1">
+				<form action="utenti" method="post" class="col-md-12">
 					<div class="text-xs-center">
 						<h5>Accedi a FLM</h5>
 					</div>
@@ -35,14 +35,14 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-6">
+						<div class="col-md-5">
 							<input type="submit" class="btn btn-primary" value="Accedi">
 						</div>
-						<div class="col-sm-6">
+						<div class="col-md-7">
 							<a href="utenti?action=loginOspite" class="btn btn-outline-primary">Accedi come ospite</a>
 						</div>
 					</div>
-					<a href="registrazioneAllenatore.jsp" class="display-block">Registra allenatore</a>
+					<a href="registrazioneAllenatore.jsp">Registra allenatore</a>
 				</form>
 			</div>
 		</div>
