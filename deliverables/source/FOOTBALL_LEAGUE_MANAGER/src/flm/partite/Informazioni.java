@@ -12,19 +12,12 @@ public class Informazioni {
 	static final int DOPPIO_GIALLO = 2;
 	static final int ROSSO = 3;
 	
-	/**
-	 * @param goal
-	 * @param assist
-	 * @param cartellino
-	 * @param squalifica
-	 * @param motivazione
-	 */
 	public Informazioni() {
 		this.goal = 0;
 		this.assist = 0;
 		this.cartellino = NESSUN_CARTELLINO;
 		this.squalifica = 0;
-		this.motivazione = "";
+		this.motivazione = null;
 	}
 
 	/**

@@ -4,13 +4,9 @@ public class Giocatore {
 	private String nome;
 	private String cognome;
 	
-	/**
-	 * @param nome
-	 * @param cognome
-	 */
-	public Giocatore(String nome, String cognome) {
-		this.nome = nome;
-		this.cognome = cognome;
+	public Giocatore() {
+		this.nome = null;
+		this.cognome = null;
 	}
 
 	/**

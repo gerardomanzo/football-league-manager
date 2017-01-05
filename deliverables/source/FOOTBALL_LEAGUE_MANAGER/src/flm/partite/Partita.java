@@ -14,14 +14,11 @@ public class Partita {
 	private Squadra squadraOspite;
 	private Arbitro arbitro;
 	
-	/**
-	 * @param giornata
-	 * @param data
-	 */
-	public Partita(int giornata, Squadra squadraCasa, Squadra squadraOspite) {
-		this.giornata = giornata;
-		this.squadraCasa = squadraCasa;
-		this.squadraOspite = squadraOspite;
+	public Partita() {
+		this.giornata = -1;
+		this.data = null;
+		this.squadraCasa = null;
+		this.squadraOspite = null;
 		this.arbitro = null; 
 	}
 
@@ -94,7 +91,7 @@ public class Partita {
 	public Squadra getSquadraOspite() {
 		return squadraOspite;
 	}
-	
+
 	/**
 	 * @return the arbitro
 	 */
@@ -107,5 +104,19 @@ public class Partita {
 	 */
 	public void setArbitro(Arbitro arbitro) {
 		this.arbitro = arbitro;
+	}
+
+	/**
+	 * @param squadraCasa the squadraCasa to set
+	 */
+	public void setCasa(Squadra squadraCasa) {
+		this.squadraCasa = squadraCasa;
+	}
+
+	/**
+	 * @param squadraOspite the squadraOspite to set
+	 */
+	public void setOspite(Squadra squadraOspite) {
+		this.squadraOspite = squadraOspite;
 	}
 }

@@ -22,19 +22,15 @@ public class Squadra {
 	static final int ATTESA_PAGAMENTO = 2;
 	static final int SQUADRA_ISCRITTA = 3;
 	
-	/**
-	 * @param nomeSquadra
-	 * @param allenatore
-	 */
-	public Squadra(String nomeSquadra, Allenatore allenatore) {
-		this.nomeSquadra = nomeSquadra;
+	public Squadra() {
+		this.nomeSquadra = null;
 		this.vittorie = 0;
 		this.pareggi = 0;
 		this.sconfitte = 0;
 		this.goalFatti = 0;
 		this.goalSubiti = 0;
 		this.statoIscrizione = NESSUNA_ISCRIZIONE;
-		this.allenatore = allenatore;
+		this.allenatore = null;
 		this.rosa = new HashSet<Giocatore>();
 	}
 
@@ -150,6 +146,13 @@ public class Squadra {
 		this.statoIscrizione = SQUADRA_ISCRITTA;
 	}
 	
+	/**
+	 * @param allenatore the allenatore to set
+	 */
+	public void setAllenatore(Allenatore allenatore) {
+		this.allenatore = allenatore;
+	}
+
 	/**
 	 * @return the allenatore
 	 */

@@ -16,15 +16,10 @@ public class Campionato {
 	private Map<String, Squadra> squadre;
 	private List<Partita> calendario;
 
-	/**
-	 * @param nomeCampionato
-	 * @param numSquadre
-	 * @param quota
-	 */
-	public Campionato(String nomeCampionato, int numSquadre, float quota) {
-		this.nomeCampionato = nomeCampionato;
-		this.numSquadre = numSquadre;
-		this.quota = quota;
+	public Campionato() {
+		this.nomeCampionato = null;
+		this.numSquadre = 0;
+		this.quota = 0;
 		this.squadre = new HashMap<String, Squadra>();
 		this.calendario = new ArrayList<Partita>();
 	}
@@ -103,14 +98,21 @@ public class Campionato {
 		}
 
 		for(int i = 0; i < giornate; i++) {
-			
-			// alterna le partite in casa e fuori
-			if(i % 2 == 0)
-				for(int j = 0; j < numSquadre /2 ; j++)
-					calendario.add(new Partita(i+1, casa[j], ospite[j]));
-			else
-				for(int j = 0; j < numSquadre /2 ; j++)
-					calendario.add(new Partita(i+1, ospite[j], casa[j]));
+			for(int j = 0; j < numSquadre /2 ; j++) {
+				Partita partita = new Partita();
+				partita.setGiornata(i+1);
+
+				if(j % 2 == 0) {
+					partita.setCasa(casa[j]);
+					partita.setOspite(ospite[j]);
+				}
+				else {
+					partita.setCasa(ospite[j]);
+					partita.setOspite(casa[j]);
+				}
+
+				calendario.add(partita);
+			}
 
 			// salva l'elemento fisso
 			Squadra pivot = casa[0];
