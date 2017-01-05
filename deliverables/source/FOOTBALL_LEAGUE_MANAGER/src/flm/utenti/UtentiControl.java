@@ -45,7 +45,49 @@ public class UtentiControl extends HttpServlet {
 				System.out.println("registrazioneArbitro");
 			}
 			else if(action.equalsIgnoreCase("loginUtente")) {
-				System.out.println("loginUtente");
+				String email = request.getParameter("email");
+				String password = request.getParameter("password");
+
+				Utente utente = new Utente();
+				utente.setEmail(email);
+				utente.setPassword(password);
+
+				utente = managerUtenti.autentica(utente);
+
+				if(utente == null) {
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(utente instanceof Allenatore) {
+					HttpSession session = request.getSession();
+
+					session.removeAttribute("utente");
+					session.setAttribute("utente", utente);
+					session.setAttribute("ruolo", "allenatore");
+
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/areaAllenatore.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(utente instanceof Arbitro) {
+					HttpSession session = request.getSession();
+
+					session.removeAttribute("utente");
+					session.setAttribute("utente", utente);
+					session.setAttribute("ruolo", "arbitro");
+
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/areaArbitro.jsp");
+					dispatcher.forward(request, response);
+				}
+				else {
+					HttpSession session = request.getSession();
+
+					session.removeAttribute("utente");
+					session.setAttribute("utente", utente);
+					session.setAttribute("ruolo", "amministratore");
+
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
+					dispatcher.forward(request, response);
+				}
 			}
 			else {
 				System.out.println("loginOspite");
