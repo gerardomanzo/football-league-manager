@@ -110,17 +110,17 @@ CREATE TABLE IF NOT EXISTS `Squadra` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Utenti`
+-- Struttura della tabella `Utente`
 --
 
-CREATE TABLE IF NOT EXISTS `Utenti` (
-  `ID_Arbitro` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Utente` (
+  `ID_Utente` int(5) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(25) NOT NULL,
   `Cognome` varchar(25) NOT NULL,
   `Email` varchar(25) NOT NULL,
   `Password` varchar(25) NOT NULL,
   `Ruolo` char(1) NOT NULL,
-  PRIMARY KEY (`ID_Arbitro`)
+  PRIMARY KEY (`ID_Utente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
@@ -142,7 +142,7 @@ ALTER TABLE `Partecipazione`
 --
 ALTER TABLE `Partita`
   ADD CONSTRAINT `Partita_ibfk_1` FOREIGN KEY (`ID_Campionato`) REFERENCES `Campionato` (`ID_Campionato`),
-  ADD CONSTRAINT `Partita_ibfk_2` FOREIGN KEY (`ID_Arbitro`) REFERENCES `Utenti` (`ID_Utente`),
+  ADD CONSTRAINT `Partita_ibfk_2` FOREIGN KEY (`ID_Arbitro`) REFERENCES `Utente` (`ID_Utente`),
   ADD CONSTRAINT `Partita_ibfk_3` FOREIGN KEY (`ID_Casa`) REFERENCES `Squadra` (`ID_Squadra`),
   ADD CONSTRAINT `Partita_ibfk_4` FOREIGN KEY (`ID_Ospite`) REFERENCES `Squadra` (`ID_Squadra`);
 
@@ -150,7 +150,7 @@ ALTER TABLE `Partita`
 -- Vincoli per la tabella `Squadra`
 --
 ALTER TABLE `Squadra`
-  ADD CONSTRAINT `Squadra_ibfk_1` FOREIGN KEY (`ID_Allenatore`) REFERENCES `Utenti` (`ID_Utente`),
+  ADD CONSTRAINT `Squadra_ibfk_1` FOREIGN KEY (`ID_Allenatore`) REFERENCES `Utente` (`ID_Utente`),
   ADD CONSTRAINT `Squadra_ibfk_2` FOREIGN KEY (`ID_Campionato`) REFERENCES `Campionato` (`ID_Campionato`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
