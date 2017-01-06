@@ -2,7 +2,10 @@ package flm.campionati;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import flm.storage.DriverManagerConnectionPool;
 
@@ -31,5 +34,38 @@ public class CampionatiManager {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+	
+	public Collection<Campionato> cercaCampionati() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		Collection<Campionato> campionati = new LinkedList<Campionato>();
+		String selectSQL = "SELECT * FROM " + CampionatiManager.TABLE_CAMPIONATI;
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while(rs.next()) {
+				Campionato campionato = new Campionato();
+				campionato.setNomeCampionato(rs.getString("Nome"));
+				campionato.setNumSquadre(rs.getInt("NumSquadre"));
+				campionato.setQuota(rs.getFloat("Quota"));
+
+				campionati.add(campionato);
+			}
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return campionati;
 	}
 }
