@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import flm.campionati.CampionatiManager;
 
@@ -24,25 +25,28 @@ public class UtentiControl extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String action = request.getParameter("action");
 		
 		try {
 			if(action.equalsIgnoreCase("registrazioneAllenatore")) {
-				
-				System.out.println("registrazioneAllenatore");
-				
 				String nome = request.getParameter("nome");
 				String cognome = request.getParameter("cognome");
 				String email = request.getParameter("email");
 				String password = request.getParameter("password");
 				
-				Allenatore allenatore = new Allenatore(nome, cognome, email, password);
+				Allenatore allenatore = new Allenatore();
+				allenatore.setNome(nome);
+				allenatore.setCognome(cognome);
+				allenatore.setEmail(email);
+				allenatore.setPassword(password);
 				
 				managerUtenti.salvaAllenatore(allenatore);
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+				dispatcher.forward(request, response);
 			}
 			else if(action.equalsIgnoreCase("registrazioneArbitro")) {
-				System.out.println("registrazioneArbitro");
+
 			}
 			else if(action.equalsIgnoreCase("loginUtente")) {
 				String email = request.getParameter("email");
@@ -55,8 +59,7 @@ public class UtentiControl extends HttpServlet {
 				utente = managerUtenti.autentica(utente);
 
 				if(utente == null) {
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-					dispatcher.forward(request, response);
+
 				}
 				else if(utente instanceof Allenatore) {
 					HttpSession session = request.getSession();
@@ -90,9 +93,8 @@ public class UtentiControl extends HttpServlet {
 				}
 			}
 			else {
-				System.out.println("loginOspite");
 				request.removeAttribute("campionati");
-				request.setAttribute("campionati", managerCampionati.doRetrieveAll());
+				request.setAttribute("campionati", managerCampionati.cercaCampionati());
 								
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/areaOspite.jsp");
 				dispatcher.forward(request, response);
