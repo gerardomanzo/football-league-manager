@@ -14,4 +14,13 @@
   	<url-pattern>/utenti</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>CampionatoControl</servlet-name>
+  	<servlet-class>flm.campionati.CampionatoControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CampionatoControl</servlet-name>
+  	<url-pattern>/campionati</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
