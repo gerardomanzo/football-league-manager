@@ -9,12 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import flm.campionati.CampionatiManager;
-
 public class UtentiControl extends HttpServlet {
 	private static final long serialVersionUID = -1710635939916957861L;
 	private static UtentiManager managerUtenti = new UtentiManager();
-	private static CampionatiManager managerCampionati = new CampionatiManager();
 	
 	public UtentiControl() {
 		super();
@@ -92,10 +89,7 @@ public class UtentiControl extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 			}
-			else {
-				request.removeAttribute("campionati");
-				request.setAttribute("campionati", managerCampionati.cercaCampionati());
-								
+			else {								
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/areaOspite.jsp");
 				dispatcher.forward(request, response);
 			}
