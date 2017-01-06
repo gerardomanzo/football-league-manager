@@ -2,46 +2,37 @@
 <html lang="it">
 <head>
 	<%@ include file="headData.html"%>
-	<%@ page import="java.util.*, flm.campionati.Campionato"%>
-	<%
-		Collection<?> campionati = (Collection<?>) request.getAttribute("campionati");
-	%>
 	<title>Area Ospite</title>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4 offset-sm-4">
-				<%if(campionati != null && campionati.size() != 0)
-				{%>
-					<form action="utenti" method="post">
-						<div class="text-xs-center">
-							<h5>Seleziona un campionato</h5>
-						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<select class="form-control" id="exampleSelect1">
-									<%
-									Iterator<?> it = campionati.iterator();
-																
-									while (it.hasNext())
-									{
-										Campionato c = (Campionato) it.next();
-										%>
-										<option><%=c.getNomeCampionato()%></option>
-									<%} %>
-								</select>
+			<div class="col-md-12">
+				<div class="card-deck-wrapper">
+					<div class="card-deck">
+						<div class="card card-outline-success">
+							<div class="card-block">
+								<h4 class="card-title">Visualizza rosa</h4>
+								<p class="card-text">Visualizza la rosa di una squadra.</p>
+								<a href="#" class="btn btn-primary">Visualizza!</a>
 							</div>
 						</div>
-						<input type="submit" class="btn btn-primary" value="Invia">
-					</form>
-					<%
-				}
-				else
-				{%>
-					<p>Nessun campionato aperto!</p>
-					<%
-				}%>
+						<div class="card card-outline-success">
+							<div class="card-block">
+								<h4 class="card-title">Visualizza classifica</h4>
+								<p class="card-text">Visualizza la classifica di un campionato.</p>
+								<a href="#" class="btn btn-primary">Visualizza!</a>
+							</div>
+						</div>
+						<div class="card card-outline-success">
+							<div class="card-block">
+								<h4 class="card-title">Visualizza calendario</h4>
+								<p class="card-text">Visualizza il calendario delle partite.</p>
+								<a href="#" class="btn btn-primary">Visualizza!</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

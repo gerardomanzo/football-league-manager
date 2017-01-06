@@ -39,7 +39,7 @@
 							<input type="submit" class="btn btn-primary" value="Accedi">
 						</div>
 						<div class="col-md-7">
-							<a href="utenti?action=loginOspite" class="btn btn-outline-primary">Accedi come ospite</a>
+							<a href="areaOspite.jsp" class="btn btn-outline-primary">Accedi come ospite</a>
 						</div>
 					</div>
 					<a href="registrazioneAllenatore.jsp">Registra allenatore</a>
