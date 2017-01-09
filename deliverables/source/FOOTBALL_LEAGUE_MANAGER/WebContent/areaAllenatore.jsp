@@ -14,7 +14,7 @@
 							<div class="card-block">
 								<h4 class="card-title">Crea squadra</h4>
 								<p class="card-text">Crea una nuova squadra e iscrive i giocatori.</p>
-								<a href="#" class="btn btn-primary">Crea!</a>
+								<a href="creaSquadra.jsp" class="btn btn-primary">Crea!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
