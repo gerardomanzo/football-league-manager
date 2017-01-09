@@ -96,14 +96,14 @@ CREATE TABLE IF NOT EXISTS `Partita` (
 CREATE TABLE IF NOT EXISTS `Squadra` (
   `ID_Squadra` int(5) NOT NULL AUTO_INCREMENT,
   `ID_Allenatore` int(5) NOT NULL,
-  `ID_Campionato` int(5) NOT NULL,
+  `ID_Campionato` int(5) DEFAULT NULL,
   `NomeSquadra` varchar(25) NOT NULL,
-  `Vittorie` int(5) NOT NULL,
-  `Pareggi` int(5) NOT NULL,
-  `Sconfitte` int(5) NOT NULL,
-  `GoalFatti` int(5) NOT NULL,
-  `GoalSubiti` int(5) NOT NULL,
-  `StatoIscrizione` tinyint(1) NOT NULL,
+  `Vittorie` int(5) DEFAULT '0',
+  `Pareggi` int(5) DEFAULT '0',
+  `Sconfitte` int(5) DEFAULT '0',
+  `GoalFatti` int(5) DEFAULT '0',
+  `GoalSubiti` int(5) DEFAULT '0',
+  `StatoIscrizione` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`ID_Squadra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
