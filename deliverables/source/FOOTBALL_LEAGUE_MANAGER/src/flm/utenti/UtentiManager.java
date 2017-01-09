@@ -66,30 +66,26 @@ public class UtentiManager {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if(rs.next())
-				if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ALLENATORE)) {
-					Allenatore allenatore = new Allenatore();
-					allenatore.setNome(rs.getString("Nome"));
-					allenatore.setCognome(rs.getString("Cognome"));
-					allenatore.setEmail(utente.getEmail());
+			{
+				Utente utenteReg;
 
-					return allenatore;
-				}
-				else if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ARBITRO)) {
-					Arbitro arbitro = new Arbitro();
-					arbitro.setNome(rs.getString("Nome"));
-					arbitro.setCognome(rs.getString("Cognome"));
-					arbitro.setEmail(utente.getEmail());
+				if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ALLENATORE))
+					utenteReg = new Allenatore();
+				else if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ARBITRO))
+					utenteReg = new Arbitro();
+				else if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ADMIN))
+					utenteReg = new Utente();
+				else
+					return null;
 
-					return arbitro;
-				}
-				else if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ADMIN)) {
-					utente.setNome(rs.getString("Nome"));
-					utente.setCognome(rs.getString("Cognome"));
-					utente.setPassword(null);
+				utenteReg.setID(rs.getInt("ID_Utente"));
+				utenteReg.setNome(rs.getString("Nome"));
+				utenteReg.setCognome(rs.getString("Cognome"));
+				utenteReg.setEmail(rs.getString("Email"));
+				utenteReg.setPassword(null);
 
-					return utente;
-				}
-
+				return utenteReg;
+			}
 			return null;
 		}
 		finally {

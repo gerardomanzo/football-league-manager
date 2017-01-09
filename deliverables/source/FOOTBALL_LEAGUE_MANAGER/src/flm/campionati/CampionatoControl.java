@@ -25,16 +25,16 @@ public class CampionatoControl extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
+		
 		try {
-			HttpSession session = request.getSession();
-			Utente utente = (Utente) session.getAttribute("utente");
-												
-			String ruolo = (String) session.getAttribute("ruolo");
-						
-			String action = request.getParameter("action");
-			
 			if(action != null) {
 				if(action.equalsIgnoreCase("creaCampionato")) {
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+														
+					String ruolo = (String) session.getAttribute("ruolo");
+					
 					if(utente != null && ruolo.equalsIgnoreCase("amministratore")) { 
 						String nome = request.getParameter("nomeCampionato");
 						int numeroSquadre = Integer.parseInt(request.getParameter("numSquadre"));

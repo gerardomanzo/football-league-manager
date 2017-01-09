@@ -16,6 +16,7 @@ public class CampionatiManager {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String query = "INSERT INTO " + CampionatiManager.TABLE_CAMPIONATI + "(Nome,NumSquadre,Quota) VALUES(?,?,?)";
+		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(query);
@@ -49,6 +50,7 @@ public class CampionatiManager {
 
 			while(rs.next()) {
 				Campionato campionato = new Campionato();
+				campionato.setID(rs.getInt("ID_Campionato"));
 				campionato.setNomeCampionato(rs.getString("Nome"));
 				campionato.setNumSquadre(rs.getInt("NumSquadre"));
 				campionato.setQuota(rs.getFloat("Quota"));
