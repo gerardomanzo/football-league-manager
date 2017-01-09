@@ -1,18 +1,34 @@
 package flm.utenti;
 
 public class Utente {
+	private int id;
 	private String nome;
 	private String cognome;
 	private String email;
 	private String password;
 	
 	public Utente() {
+		this.id = -1;
 		this.nome = null;
 		this.cognome = null;
 		this.email = null;
 		this.password = null;
 	}
 	
+	/**
+	 * @return the id
+	 */
+	public int getID() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setID(int id) {
+		this.id = id;
+	}
+
 	/**
 	 * @return the nome
 	 */

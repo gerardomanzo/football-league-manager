@@ -7,6 +7,7 @@ import flm.giocatori.Giocatore;
 import flm.utenti.Allenatore;
 
 public class Squadra {
+	private int id;
 	private String nomeSquadra;
 	private int vittorie;
 	private int pareggi;
@@ -23,6 +24,7 @@ public class Squadra {
 	static final int SQUADRA_ISCRITTA = 3;
 	
 	public Squadra() {
+		this.id = -1;
 		this.nomeSquadra = null;
 		this.vittorie = 0;
 		this.pareggi = 0;
@@ -32,6 +34,20 @@ public class Squadra {
 		this.statoIscrizione = NESSUNA_ISCRIZIONE;
 		this.allenatore = null;
 		this.rosa = new HashSet<Giocatore>();
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getID() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setID(int id) {
+		this.id = id;
 	}
 
 	/**

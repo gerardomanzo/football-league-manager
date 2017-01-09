@@ -6,6 +6,7 @@ import flm.squadre.Squadra;
 import flm.utenti.Arbitro;
 
 public class Partita {
+	private int id;
 	private int giornata;
 	private int goalCasa;
 	private int goalOspite;
@@ -15,11 +16,26 @@ public class Partita {
 	private Arbitro arbitro;
 	
 	public Partita() {
+		this.id = -1;
 		this.giornata = -1;
 		this.data = null;
 		this.squadraCasa = null;
 		this.squadraOspite = null;
 		this.arbitro = null; 
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getID() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setID(int id) {
+		this.id = id;
 	}
 
 	/**

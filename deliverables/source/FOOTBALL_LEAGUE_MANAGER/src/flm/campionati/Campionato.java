@@ -10,6 +10,7 @@ import flm.partite.Partita;
 import flm.squadre.Squadra;
 
 public class Campionato {
+	private int id;
 	private String nomeCampionato;
 	private int numSquadre;
 	private float quota;
@@ -17,11 +18,26 @@ public class Campionato {
 	private List<Partita> calendario;
 
 	public Campionato() {
+		this.id = -1;
 		this.nomeCampionato = null;
 		this.numSquadre = 0;
 		this.quota = 0;
 		this.squadre = new HashMap<String, Squadra>();
 		this.calendario = new ArrayList<Partita>();
+	}
+
+	/**
+	 * @return the ID
+	 */
+	public int getID() {
+		return id;
+	}
+
+	/**
+	 * @param id the ID to set
+	 */
+	public void setID(int id) {
+		this.id = id;
 	}
 
 	/**

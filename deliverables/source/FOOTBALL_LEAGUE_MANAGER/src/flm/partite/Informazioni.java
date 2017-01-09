@@ -1,6 +1,7 @@
 package flm.partite;
 
 public class Informazioni {
+	private int id;
 	private int goal;
 	private int assist;
 	private int cartellino;
@@ -13,11 +14,26 @@ public class Informazioni {
 	static final int ROSSO = 3;
 	
 	public Informazioni() {
+		this.id = -1;
 		this.goal = 0;
 		this.assist = 0;
 		this.cartellino = NESSUN_CARTELLINO;
 		this.squalifica = 0;
 		this.motivazione = null;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getID() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setID(int id) {
+		this.id = id;
 	}
 
 	/**
