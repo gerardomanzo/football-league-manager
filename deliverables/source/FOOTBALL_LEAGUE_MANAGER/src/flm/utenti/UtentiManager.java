@@ -50,7 +50,7 @@ public class UtentiManager {
 			DriverManagerConnectionPool.releaseConnection(connection);
 		}
 	}
-	public void salvaArbitro (Arbitro arbitro) throws SQLException{
+	public void salvaArbitro(Arbitro arbitro) throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String selectSQL = "SELECT * FROM " + UtentiManager.TABLE_UTENTI + " WHERE Email = ?";
