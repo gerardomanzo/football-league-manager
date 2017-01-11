@@ -30,6 +30,7 @@ public class GiocatoreControl {
 			String action = request.getParameter("action");
 
 			if(action != null) {
+				if(action.equalsIgnoreCase("modificaGiocatore")) {
 				if(utente != null && ruolo.equalsIgnoreCase("allenatore")){
 					String nome =  request.getParameter("nomeGiocatore");
 					String cognome = request.getParameter("cognomeGiocatore");
@@ -43,6 +44,7 @@ public class GiocatoreControl {
 					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
 					dispatcher.forward(request, response);
 
+				}
 				}
 			}
 
