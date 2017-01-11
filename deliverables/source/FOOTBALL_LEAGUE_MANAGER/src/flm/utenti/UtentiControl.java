@@ -43,6 +43,27 @@ public class UtentiControl extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			else if(action.equalsIgnoreCase("registrazioneArbitro")) {
+				HttpSession session = request.getSession();
+				Utente utente = (Utente) session.getAttribute("utente");
+				String ruolo = (String) session.getAttribute("ruolo");
+				
+				if(utente != null && ruolo.equalsIgnoreCase("amministratore")) { 
+				String nome = request.getParameter("nome");
+				String cognome = request.getParameter("cognome");
+				String email = request.getParameter("email");
+				String password = request.getParameter("password");
+				
+				Arbitro arbitro = new Arbitro();
+				arbitro.setNome(nome);
+				arbitro.setCognome(cognome);
+				arbitro.setEmail(email);
+				arbitro.setPassword(password);
+				
+				managerUtenti.salvaArbitro(arbitro);
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
+				dispatcher.forward(request, response);
+				}
 
 			}
 			else if(action.equalsIgnoreCase("loginUtente")) {
