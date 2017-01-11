@@ -50,7 +50,45 @@ public class UtentiManager {
 			DriverManagerConnectionPool.releaseConnection(connection);
 		}
 	}
+	
+	public void salvaArbitro (Arbitro arbitro) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "SELECT * FROM " + UtentiManager.TABLE_UTENTI + " WHERE Email = ?";
 
+		try {
+			connection = DriverManagerConnectionPool.getConnection();			
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			preparedStatement.setString(1, arbitro.getEmail());
+
+			ResultSet rs = preparedStatement.executeQuery();
+			if(!rs.next()) {
+				if(preparedStatement != null)
+					preparedStatement.close();
+
+				String insertSQL = "INSERT INTO " + UtentiManager.TABLE_UTENTI + "(Nome, Cognome, Email, Password, Ruolo) VALUES(?, ?, ?, ?, ?)";
+				preparedStatement = connection.prepareStatement(insertSQL);
+
+				preparedStatement.setString(1, arbitro.getNome());
+				preparedStatement.setString(2, arbitro.getCognome());
+				preparedStatement.setString(3, arbitro.getEmail());
+				preparedStatement.setString(4, arbitro.getPassword());
+				preparedStatement.setString(5, UtentiManager.RUOLO_ARBITRO);
+				preparedStatement.executeUpdate();
+
+				connection.commit();
+			}
+		}
+		finally {
+			if(preparedStatement != null)
+				preparedStatement.close();
+
+			DriverManagerConnectionPool.releaseConnection(connection);
+		}
+
+	}
+	
 	public Utente autentica(Utente utente) throws SQLException {		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -66,26 +104,30 @@ public class UtentiManager {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if(rs.next())
-			{
-				Utente utenteReg;
+				if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ALLENATORE)) {
+					Allenatore allenatore = new Allenatore();
+					allenatore.setNome(rs.getString("Nome"));
+					allenatore.setCognome(rs.getString("Cognome"));
+					allenatore.setEmail(utente.getEmail());
 
-				if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ALLENATORE))
-					utenteReg = new Allenatore();
-				else if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ARBITRO))
-					utenteReg = new Arbitro();
-				else if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ADMIN))
-					utenteReg = new Utente();
-				else
-					return null;
+					return allenatore;
+				}
+				else if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ARBITRO)) {
+					Arbitro arbitro = new Arbitro();
+					arbitro.setNome(rs.getString("Nome"));
+					arbitro.setCognome(rs.getString("Cognome"));
+					arbitro.setEmail(utente.getEmail());
 
-				utenteReg.setID(rs.getInt("ID_Utente"));
-				utenteReg.setNome(rs.getString("Nome"));
-				utenteReg.setCognome(rs.getString("Cognome"));
-				utenteReg.setEmail(rs.getString("Email"));
-				utenteReg.setPassword(null);
+					return arbitro;
+				}
+				else if(rs.getString("Ruolo").equalsIgnoreCase(UtentiManager.RUOLO_ADMIN)) {
+					utente.setNome(rs.getString("Nome"));
+					utente.setCognome(rs.getString("Cognome"));
+					utente.setPassword(null);
 
-				return utenteReg;
-			}
+					return utente;
+				}
+
 			return null;
 		}
 		finally {
@@ -95,4 +137,5 @@ public class UtentiManager {
 			DriverManagerConnectionPool.releaseConnection(connection);
 		}
 	}
+	
 }
