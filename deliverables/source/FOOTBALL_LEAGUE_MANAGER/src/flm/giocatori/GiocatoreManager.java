@@ -11,14 +11,37 @@ public class GiocatoreManager {
 	public void modificaGiocatore(Giocatore giocatore,String nome,String cognome) throws SQLException{
 		Connection connection=null;
 		PreparedStatement preparedStatement = null;
-		String updateSQL = "UPDATE"+ TABLE_GIOCATORI +"SET Nome=?, Cognome=? WHERE Nome=? AND Cognome=?";
+		String updateSQL = "UPDATE "+ GiocatoreManager.TABLE_GIOCATORI + " SET Nome=?, Cognome=? WHERE Nome=? AND Cognome=?";
 		try{
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
-			preparedStatement.setString(1, giocatore.getNome());    
+		    preparedStatement.setString(1, nome);
+		    preparedStatement.setString(2, cognome);
+		    preparedStatement.setString(3, giocatore.getNome());    
+		    preparedStatement.setString(4, giocatore.getCognome());
+		    preparedStatement.executeUpdate();
+		    connection.commit();
+		}finally{
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} finally {
+			 DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+	
+	public void creaGiocatore(Giocatore giocatore) throws SQLException {
+		Connection connection=null;
+		PreparedStatement preparedStatement = null;
+		String insertSQL = "INSERT INTO "+ GiocatoreManager.TABLE_GIOCATORI + "(Nome, Cognome) VALUES(?, ?)";
+		try{
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(insertSQL);
+		    preparedStatement.setString(1, giocatore.getNome());    
 		    preparedStatement.setString(2, giocatore.getCognome());
-		    preparedStatement.setString(3, nome);
-		    preparedStatement.setString(4, cognome);
+		    
 		    preparedStatement.executeUpdate();
 		    connection.commit();
 		}finally{
