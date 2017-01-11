@@ -35,9 +35,9 @@
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Registra arbitro</h4>
-								<p class="card-text">Registra un nuvo arbitro nel sistema
+								<p class="card-text">Registra un nuovo arbitro al sistema
 									FLM.</p>
-								<a href="#" class="btn btn-primary">Registra!</a>
+								<a href="registrazioneArbitro.jsp" class="btn btn-primary">Registra!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div class="card-deck-wrapper">
 					<div class="card-deck">
 						<div class="card card-outline-success">
@@ -60,6 +60,13 @@
 								<h4 class="card-title">Conferma squadra</h4>
 								<p class="card-text">Conferma l'iscrizione di una squdra.</p>
 								<a href="#" class="btn btn-primary">Conferma!</a>
+							</div>
+						</div>
+						<div class="card card-outline-success">
+							<div class="card-block">
+								<h4 class="card-title">Iscrivi giocatore</h4>
+								<p class="card-text">Iscrive un giocatore al sistema</p>
+								<a href="iscrizioneGiocatore.jsp" class="btn btn-primary">Iscrivi!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">

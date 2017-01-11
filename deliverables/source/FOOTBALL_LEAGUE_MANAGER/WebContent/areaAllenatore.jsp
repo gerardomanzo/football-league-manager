@@ -26,16 +26,16 @@
 						</div>
 						<div class="card card-outline-success">
 							<div class="card-block">
-								<h4 class="card-title">Sostituisci giocatore</h4>
-								<p class="card-text">Rimuove un giocatore dalla rosa e ne inserisce un altro.</p>
-								<a href="#" class="btn btn-primary">Sostituisci!</a>
+								<h4 class="card-title">Inserisci giocatore</h4>
+								<p class="card-text">Inserisci un giocatore alla rosa attuale.</p>
+								<a href="#" class="btn btn-primary">Inserisci!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
 							<div class="card-block">
-								<h4 class="card-title">Conferma pagamento</h4>
-								<p class="card-text">Paga la quota d'iscrizione.</p>
-								<a href="#" class="btn btn-primary">Conferma!</a>
+								<h4 class="card-title">Sostituisci giocatore</h4>
+								<p class="card-text">Rimuove un giocatore dalla rosa e ne inserisce un altro.</p>
+								<a href="#" class="btn btn-primary">Sostituisci!</a>
 							</div>
 						</div>
 					</div>
