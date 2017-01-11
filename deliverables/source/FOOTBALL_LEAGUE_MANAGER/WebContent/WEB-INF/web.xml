@@ -16,6 +16,15 @@
 		<servlet-name>CampionatoControl</servlet-name>
 		<url-pattern>/campionati</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GiocatoreControl</servlet-name>
+		<servlet-class>flm.giocatori.GiocatoreControl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GiocatoreControl</servlet-name>
+		<url-pattern>/giocatori</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>SquadraControl</servlet-name>
