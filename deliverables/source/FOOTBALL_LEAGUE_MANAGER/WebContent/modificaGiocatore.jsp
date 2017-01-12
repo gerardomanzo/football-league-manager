@@ -16,6 +16,7 @@
 					<div class="text-xs-center">
 						<h5>Modifica informazioni giocatore</h5>
 					</div>
+					<input type="hidden" name="action" value="modificaGiocatore">
 					<div class="form-group">
 						<select class="form-control" name="giocatore">
 							<%
@@ -29,7 +30,6 @@
 							%>
 						</select>
 					</div>
-					<input type="hidden" name="action" value="modificaGiocatore">
 					<div class="form-group">
 						<input type="text" class="form-control" name="nuovoNome" placeholder="Nome nuovo">
 					</div>

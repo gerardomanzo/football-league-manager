@@ -58,7 +58,7 @@
 							<div class="card-block">
 								<h4 class="card-title">Conferma squadra</h4>
 								<p class="card-text">Conferma l'iscrizione di una squdra.</p>
-								<a href="#" class="btn btn-primary">Conferma!</a>
+								<a href="squadre?action=getSquadreConferma" class="btn btn-primary">Conferma!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
