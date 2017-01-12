@@ -1,6 +1,7 @@
 package flm.squadre;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,13 +22,37 @@ public class SquadraControl extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			String action = request.getParameter("action");
+
+			if(action != null) {
+				if(action.equalsIgnoreCase("getSquadreConferma")) {
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+
+					String ruolo = (String) session.getAttribute("ruolo");
+
+					if(utente != null && ruolo.equalsIgnoreCase("amministratore")) { 
+						Collection<Squadra> squadre = model.leggiSquadreConferma();
+						
+						request.removeAttribute("squadreConferma");
+						request.setAttribute("squadreConferma", squadre);
+						
+						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaSquadra.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Error:" + e.getMessage());
+		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-
+				
 		try {
 			if(action != null) {
 				if(action.equalsIgnoreCase("creaSquadra")) {
@@ -36,7 +61,7 @@ public class SquadraControl extends HttpServlet{
 
 					String ruolo = (String) session.getAttribute("ruolo");
 
-					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) { 
+					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) {
 						String nomeSquadra = request.getParameter("nomeSquadra");
 
 						Squadra squadra = new Squadra();
@@ -46,6 +71,24 @@ public class SquadraControl extends HttpServlet{
 						model.creaSquadra(squadra);
 
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAllenatore.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				else if(action.equalsIgnoreCase("confermaSquadra")) {
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+
+					String ruolo = (String) session.getAttribute("ruolo");
+					
+					if(utente != null && ruolo.equalsIgnoreCase("amministratore")) {
+						int id = Integer.parseInt(request.getParameter("squadra"));
+											
+						Squadra squadra = new Squadra();
+						squadra.setID(id);
+						
+						model.confermaSquadra(squadra);
+						
+						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
 						dispatcher.forward(request, response);
 					}
 				}
