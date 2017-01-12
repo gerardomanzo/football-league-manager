@@ -20,8 +20,7 @@ public class Squadra {
 	
 	static final int NESSUNA_ISCRIZIONE = 0;
 	static final int ATTESA_CONFERMA = 1;
-	static final int ATTESA_PAGAMENTO = 2;
-	static final int SQUADRA_ISCRITTA = 3;
+	static final int SQUADRA_ISCRITTA = 2;
 	
 	public Squadra() {
 		this.id = -1;
@@ -149,19 +148,12 @@ public class Squadra {
 	}
 	
 	/**
-	 * set statoIscrizione to ATTESA_PAGAMENTO
-	 */
-	public void confermaSquadra() {
-		this.statoIscrizione = ATTESA_PAGAMENTO;
-	}
-	
-	/**
 	 * set statoIscrizione to SQUADRA_ISCRITTA
 	 */
-	public void confermaPagamento() {
+	public void confermaSquadra() {
 		this.statoIscrizione = SQUADRA_ISCRITTA;
 	}
-	
+		
 	/**
 	 * @param allenatore the allenatore to set
 	 */
