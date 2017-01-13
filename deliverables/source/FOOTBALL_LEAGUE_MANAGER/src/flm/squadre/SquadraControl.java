@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import flm.giocatori.Giocatore;
+import flm.giocatori.GiocatoreManager;
 import flm.utenti.Allenatore;
 import flm.utenti.Utente;
 public class SquadraControl extends HttpServlet{
 	private static final long serialVersionUID = -2530651357994741963L;
-	private static SquadreManager model = new SquadreManager();
+	private static SquadreManager modelSquadre = new SquadreManager();
+	private static GiocatoreManager modelGiocatori = new GiocatoreManager();
 
 	public SquadraControl() {
 		super();
@@ -33,12 +36,50 @@ public class SquadraControl extends HttpServlet{
 					String ruolo = (String) session.getAttribute("ruolo");
 
 					if(utente != null && ruolo.equalsIgnoreCase("amministratore")) { 
-						Collection<Squadra> squadre = model.leggiSquadreConferma();
+						Collection<Squadra> squadre = modelSquadre.leggiSquadreConferma();
 						
 						request.removeAttribute("squadreConferma");
 						request.setAttribute("squadreConferma", squadre);
 						
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaSquadra.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				else if(action.equalsIgnoreCase("iscriviGiocatore")) {
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+
+					String ruolo = (String) session.getAttribute("ruolo");
+
+					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) { 
+						Collection<Squadra> squadre = modelSquadre.trovaSquadreAllenatore(utente.getID());
+						Collection<Giocatore> giocatori = modelGiocatori.leggiGiocatori();
+						
+						request.removeAttribute("squadre");
+						request.setAttribute("squadre", squadre);
+						request.removeAttribute("giocatori");
+						request.setAttribute("giocatori", giocatori);
+						
+						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/inserimentoGiocatore.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				else if(action.equalsIgnoreCase("sostituisciGiocatore")) {
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+
+					String ruolo = (String) session.getAttribute("ruolo");
+
+					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) { 
+						Collection<Squadra> squadre = modelSquadre.trovaSquadreAllenatore(utente.getID());
+						Collection<Giocatore> giocatori = modelGiocatori.leggiGiocatori();
+						
+						request.removeAttribute("squadre");
+						request.setAttribute("squadre", squadre);
+						request.removeAttribute("giocatori");
+						request.setAttribute("giocatori", giocatori);
+						
+						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/sostituzioneGiocatore.jsp");
 						dispatcher.forward(request, response);
 					}
 				}
@@ -68,7 +109,7 @@ public class SquadraControl extends HttpServlet{
 						squadra.setNomeSquadra(nomeSquadra);
 						squadra.setAllenatore((Allenatore) utente);
 
-						model.creaSquadra(squadra);
+						modelSquadre.creaSquadra(squadra);
 
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAllenatore.jsp");
 						dispatcher.forward(request, response);
@@ -86,7 +127,7 @@ public class SquadraControl extends HttpServlet{
 						Squadra squadra = new Squadra();
 						squadra.setID(id);
 						
-						model.confermaSquadra(squadra);
+						modelSquadre.confermaSquadra(squadra);
 						
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
 						dispatcher.forward(request, response);

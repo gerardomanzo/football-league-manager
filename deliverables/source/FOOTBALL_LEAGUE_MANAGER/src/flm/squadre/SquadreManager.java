@@ -98,4 +98,79 @@ public class SquadreManager {
 			}
 		}	
 	}
+
+	public Collection<Squadra> trovaSquadreAllenatore(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "SELECT * FROM " + SquadreManager.TABLE_SQUADRE + " WHERE ID_Allenatore=?";
+		
+		Collection<Squadra> lista = new LinkedList<Squadra>();
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while(rs.next()) {
+				Squadra squadra = new Squadra();
+
+				squadra.setID(rs.getInt("ID_Squadra"));
+				squadra.setNomeSquadra(rs.getString("NomeSquadra"));
+
+				lista.add(squadra);
+			}
+
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		
+		return lista;
+	}
+	
+	public Collection<Squadra> trovaSquadreAllenatore(int id, int stato) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "SELECT * FROM " + SquadreManager.TABLE_SQUADRE + " WHERE ID_Allenatore=? AND StatoIscrizione=?";
+		
+		Collection<Squadra> lista = new LinkedList<Squadra>();
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id);
+			preparedStatement.setInt(2, stato);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while(rs.next()) {
+				Squadra squadra = new Squadra();
+
+				squadra.setID(rs.getInt("ID_Squadra"));
+				squadra.setNomeSquadra(rs.getString("NomeSquadra"));
+
+				lista.add(squadra);
+			}
+
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		
+		return lista;
+	}
 }
