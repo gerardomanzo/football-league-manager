@@ -22,21 +22,21 @@
 							<div class="card-block">
 								<h4 class="card-title">Iscrivi squadra</h4>
 								<p class="card-text">Iscrive una tua squadra ad un campionato.</p>
-								<a href="" class="btn btn-primary">Iscrivi!</a>
+								<a href="campionati?action=iscrizioneSquadra" class="btn btn-primary">Iscrivi!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Inserisci giocatore</h4>
 								<p class="card-text">Inserisci un giocatore alla rosa attuale di una tua squadra.</p>
-								<a href="#" class="btn btn-primary">Inserisci!</a>
+								<a href="squadre?action=iscriviGiocatore" class="btn btn-primary">Inserisci!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Sostituisci giocatore</h4>
-								<p class="card-text">Rimuove un giocatore dalla rosa di una tua squadra.</p>
-								<a href="#" class="btn btn-primary">Sostituisci!</a>
+								<p class="card-text">Sostutuisci un giocatore dalla rosa di una tua squadra.</p>
+								<a href="squadre?action=sostituisciGiocatore" class="btn btn-primary">Sostituisci!</a>
 							</div>
 						</div>
 					</div>
