@@ -18,9 +18,9 @@ public class Squadra {
 	private Allenatore allenatore;
 	private Set<Giocatore> rosa;
 	
-	static final int NESSUNA_ISCRIZIONE = 0;
-	static final int ATTESA_CONFERMA = 1;
-	static final int SQUADRA_ISCRITTA = 2;
+	public static final int NESSUNA_ISCRIZIONE = 0;
+	public static final int ATTESA_CONFERMA = 1;
+	public static final int SQUADRA_ISCRITTA = 2;
 	
 	public Squadra() {
 		this.id = -1;
