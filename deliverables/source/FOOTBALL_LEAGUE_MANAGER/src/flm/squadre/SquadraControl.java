@@ -164,14 +164,18 @@ public class SquadraControl extends HttpServlet{
 					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) {
 						int IDSquadra = Integer.parseInt(request.getParameter("squadra"));
 						int IDGiocatore = Integer.parseInt(request.getParameter("giocatore"));
-
+						int IDGiocatoreNuovo = Integer.parseInt(request.getParameter("giocatoreNuovo"));
+						
 						Squadra squadra = new Squadra();
 						squadra.setID(IDSquadra);
 
 						Giocatore giocatore = new Giocatore();
 						giocatore.setID(IDGiocatore);
+						
+						Giocatore giocatoreNuovo = new Giocatore();
+						giocatore.setID(IDGiocatoreNuovo);
 
-						modelSquadre.rimuoviGiocatore(squadra, giocatore);
+						modelSquadre.rimuoviGiocatore(squadra, giocatore, giocatoreNuovo);
 
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAllenatore.jsp");
 						dispatcher.forward(request, response);

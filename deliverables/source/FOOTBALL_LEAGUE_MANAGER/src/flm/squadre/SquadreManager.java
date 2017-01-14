@@ -180,7 +180,7 @@ public class SquadreManager {
 	{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String query = "INSERT INTO " + SquadreManager.TABLE_PARTECIPAZIONE + "VALUES(?,?)";
+		String query = "INSERT INTO " + SquadreManager.TABLE_PARTECIPAZIONE + " VALUES(?,?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -201,17 +201,18 @@ public class SquadreManager {
 		}
 	}
 
-	public void rimuoviGiocatore(Squadra squadra, Giocatore giocatore) throws SQLException 
+	public void rimuoviGiocatore(Squadra squadra, Giocatore giocatore, Giocatore giocatoreNuovo) throws SQLException 
 	{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String query = "INSERT INTO " + SquadreManager.TABLE_PARTECIPAZIONE + "VALUES(?,?)";
+		String query = "UPDATE " + SquadreManager.TABLE_PARTECIPAZIONE + " SET ID_Giocatore=? WHERE ID_Squadra=? AND ID_Giocatore=?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, squadra.getID());
 			preparedStatement.setInt(2, giocatore.getID());
+			preparedStatement.setInt(3, giocatoreNuovo.getID());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		}
