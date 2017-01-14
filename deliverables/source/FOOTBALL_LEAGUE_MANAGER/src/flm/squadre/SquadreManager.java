@@ -210,9 +210,9 @@ public class SquadreManager {
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, squadra.getID());
-			preparedStatement.setInt(2, giocatore.getID());
-			preparedStatement.setInt(3, giocatoreNuovo.getID());
+			preparedStatement.setInt(1, giocatoreNuovo.getID());
+			preparedStatement.setInt(2, squadra.getID());			
+			preparedStatement.setInt(3, giocatore.getID());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		}

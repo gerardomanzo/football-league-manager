@@ -155,7 +155,7 @@ public class SquadraControl extends HttpServlet{
 						dispatcher.forward(request, response);
 					}
 				}
-				else if(action.equalsIgnoreCase("rimuoviGiocatore")) {
+				else if(action.equalsIgnoreCase("sostituisciGiocatore")) {
 					HttpSession session = request.getSession();
 					Utente utente = (Utente) session.getAttribute("utente");
 
