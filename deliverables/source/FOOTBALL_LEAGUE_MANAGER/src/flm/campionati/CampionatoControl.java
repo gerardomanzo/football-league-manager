@@ -21,48 +21,32 @@ public class CampionatoControl extends HttpServlet{
 	public CampionatoControl() {
 		super();
 	}
-
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-
+		
 		try {
 			if(action != null) {
 				if(action.equalsIgnoreCase("iscrizioneSquadra")) {
 					HttpSession session = request.getSession();
 					Utente utente = (Utente) session.getAttribute("utente");
-
+														
 					String ruolo = (String) session.getAttribute("ruolo");
-
+					
 					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) {
 						Collection<Squadra> squadre = modelSquadre.trovaSquadreAllenatore(utente.getID(), Squadra.NESSUNA_ISCRIZIONE);
 						Collection<Campionato> campionati = modelCampionati.cercaCampionati();
-
+						
 						request.removeAttribute("squadre");
 						request.setAttribute("squadre", squadre);
-
+						
 						request.removeAttribute("campionati");
 						request.setAttribute("campionati", campionati);
-
+						
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/iscrizioneSquadra.jsp");
 						dispatcher.forward(request, response);
 					}
-				}
-				else if (action.equalsIgnoreCase("getCampionati")){
-					HttpSession session = request.getSession();
-					Utente utente = (Utente) session.getAttribute("utente");
-
-					String ruolo = (String) session.getAttribute("ruolo");
-					if(utente != null && ruolo.equalsIgnoreCase("amministratore")) {
-						Collection<Campionato> campionati = modelCampionati.cercaCampionati();
-
-						request.removeAttribute("campionati");
-						request.setAttribute("campionati", campionati);
-
-						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/chiusuraCampionato.jsp");
-						dispatcher.forward(request, response);
-					}
-
 				}
 			}
 		}
@@ -74,55 +58,36 @@ public class CampionatoControl extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-
+		
 		try {
 			if(action != null) {
 				if(action.equalsIgnoreCase("creaCampionato")) {
 					HttpSession session = request.getSession();
 					Utente utente = (Utente) session.getAttribute("utente");
-
+														
 					String ruolo = (String) session.getAttribute("ruolo");
-
+					
 					if(utente != null && ruolo.equalsIgnoreCase("amministratore")) { 
 						String nome = request.getParameter("nomeCampionato");
 						int numeroSquadre = Integer.parseInt(request.getParameter("numSquadre"));
 						float quota = Float.parseFloat(request.getParameter("quotaIscrizione"));
-
+					
 						Campionato campionato = new Campionato();
 						campionato.setNomeCampionato(nome);
 						campionato.setNumSquadre(numeroSquadre);
 						campionato.setQuota(quota);
-
+							
 						modelCampionati.creaCampionato(campionato);
-
+						
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
 						dispatcher.forward(request, response);
 					}
 				}
-				else if (action.equalsIgnoreCase("chiusuraCampionato")){
-					HttpSession session = request.getSession();
-
-					Utente utente = (Utente) session.getAttribute("utente");
-
-					String ruolo = (String) session.getAttribute("ruolo");
-					if(utente !=  null && ruolo.equalsIgnoreCase("amministratore")) {
-						int ID_Campionato = Integer.parseInt(request.getParameter("ID_Campionato"));
-
-						Campionato campionato = new Campionato();
-						campionato.setID(ID_Campionato);
-
-						modelCampionati.chiusuraCampionato(campionato);
-
-						RequestDispatcher dispatcher =  request.getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
-						dispatcher.forward(request, response);
-					}
-				}
-
 			}
 		}
 		catch (Exception e) {
 			System.out.println("Error:" + e.getMessage());
 		}
 	}
-
+	
 }

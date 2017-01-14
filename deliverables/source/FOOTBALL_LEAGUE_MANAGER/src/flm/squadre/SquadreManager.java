@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import flm.giocatori.Giocatore;
 import flm.storage.DriverManagerConnectionPool;
 
 public class SquadreManager {
 	private static final String TABLE_SQUADRE = "Squadra";
+	private static final String TABLE_PARTECIPAZIONE = "Partecipazione";
 
 	public void creaSquadra(Squadra squadra) throws SQLException {
 		Connection connection = null;
@@ -40,7 +42,7 @@ public class SquadreManager {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String selectSQL = "SELECT * FROM " + SquadreManager.TABLE_SQUADRE + " WHERE StatoIscrizione=?";
-		
+
 		Collection<Squadra> lista = new LinkedList<Squadra>();
 
 		try {
@@ -69,7 +71,7 @@ public class SquadreManager {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return lista;
 	}
 
@@ -77,10 +79,10 @@ public class SquadreManager {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSQL = "UPDATE "+ SquadreManager.TABLE_SQUADRE+ " SET StatoIscrizione=? WHERE ID_Squadra=?";
-		
+
 		try{
 			connection = DriverManagerConnectionPool.getConnection();
-			
+
 			preparedStatement = connection.prepareStatement(updateSQL);
 			preparedStatement.setInt(1, Squadra.SQUADRA_ISCRITTA);
 			preparedStatement.setInt(2, squadra.getID());
@@ -103,14 +105,14 @@ public class SquadreManager {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String selectSQL = "SELECT * FROM " + SquadreManager.TABLE_SQUADRE + " WHERE ID_Allenatore=?";
-		
+
 		Collection<Squadra> lista = new LinkedList<Squadra>();
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, id);
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while(rs.next()) {
@@ -132,15 +134,15 @@ public class SquadreManager {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return lista;
 	}
-	
+
 	public Collection<Squadra> trovaSquadreAllenatore(int id, int stato) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String selectSQL = "SELECT * FROM " + SquadreManager.TABLE_SQUADRE + " WHERE ID_Allenatore=? AND StatoIscrizione=?";
-		
+
 		Collection<Squadra> lista = new LinkedList<Squadra>();
 
 		try {
@@ -170,7 +172,58 @@ public class SquadreManager {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return lista;
+	}
+
+	public void inserisciGiocatore(Squadra squadra, Giocatore giocatore) throws SQLException 
+	{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String query = "INSERT INTO " + SquadreManager.TABLE_PARTECIPAZIONE + "VALUES(?,?)";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, squadra.getID());
+			preparedStatement.setInt(2, giocatore.getID());
+			preparedStatement.executeUpdate();
+			connection.commit();
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public void rimuoviGiocatore(Squadra squadra, Giocatore giocatore) throws SQLException 
+	{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String query = "INSERT INTO " + SquadreManager.TABLE_PARTECIPAZIONE + "VALUES(?,?)";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, squadra.getID());
+			preparedStatement.setInt(2, giocatore.getID());
+			preparedStatement.executeUpdate();
+			connection.commit();
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
 	}
 }

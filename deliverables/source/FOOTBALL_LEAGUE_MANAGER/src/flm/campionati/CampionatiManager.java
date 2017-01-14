@@ -16,7 +16,7 @@ public class CampionatiManager {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String query = "INSERT INTO " + CampionatiManager.TABLE_CAMPIONATI + "(Nome,NumSquadre,Quota) VALUES(?,?,?)";
-
+		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(query);
@@ -36,7 +36,7 @@ public class CampionatiManager {
 			}
 		}
 	}
-
+	
 	public Collection<Campionato> cercaCampionati() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -70,26 +70,4 @@ public class CampionatiManager {
 
 		return campionati;
 	}
-
-	public void chiusuraCampionato(Campionato campionato) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		String deleteSQL= " DELETE FROM " + CampionatiManager.TABLE_CAMPIONATI + "WHERE ID_Campionato=? ";
-						try {
-							connection = DriverManagerConnectionPool.getConnection();
-							preparedStatement = connection.prepareStatement(deleteSQL);
-							preparedStatement.setInt(1, campionato.getID());
-							preparedStatement.executeUpdate();
-							connection.commit();
-						} finally {
-							try {
-								if(preparedStatement != null)
-									preparedStatement.close();
-							} finally {
-								DriverManagerConnectionPool.releaseConnection(connection);
-							}
-						}
-
-	}
-
 }

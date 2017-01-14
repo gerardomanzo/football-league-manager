@@ -133,6 +133,50 @@ public class SquadraControl extends HttpServlet{
 						dispatcher.forward(request, response);
 					}
 				}
+				else if(action.equalsIgnoreCase("inserisciGiocatore")) {
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+
+					String ruolo = (String) session.getAttribute("ruolo");
+
+					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) {
+						int IDSquadra = Integer.parseInt(request.getParameter("squadra"));
+						int IDGiocatore = Integer.parseInt(request.getParameter("giocatore"));
+
+						Squadra squadra = new Squadra();
+						squadra.setID(IDSquadra);
+
+						Giocatore giocatore = new Giocatore();
+						giocatore.setID(IDGiocatore);
+
+						modelSquadre.inserisciGiocatore(squadra, giocatore);
+
+						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAllenatore.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				else if(action.equalsIgnoreCase("rimuoviGiocatore")) {
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+
+					String ruolo = (String) session.getAttribute("ruolo");
+
+					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) {
+						int IDSquadra = Integer.parseInt(request.getParameter("squadra"));
+						int IDGiocatore = Integer.parseInt(request.getParameter("giocatore"));
+
+						Squadra squadra = new Squadra();
+						squadra.setID(IDSquadra);
+
+						Giocatore giocatore = new Giocatore();
+						giocatore.setID(IDGiocatore);
+
+						modelSquadre.rimuoviGiocatore(squadra, giocatore);
+
+						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAllenatore.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
 			}
 		}
 		catch(Exception e) {
