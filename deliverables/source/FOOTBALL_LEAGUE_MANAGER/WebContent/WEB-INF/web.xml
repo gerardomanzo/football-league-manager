@@ -27,6 +27,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>PartitaControl</servlet-name>
+		<servlet-class>flm.partite.PartitaControl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PartitaControl</servlet-name>
+		<url-pattern>/partite</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>SquadraControl</servlet-name>
 		<servlet-class>flm.squadre.SquadraControl</servlet-class>
 	</servlet>
