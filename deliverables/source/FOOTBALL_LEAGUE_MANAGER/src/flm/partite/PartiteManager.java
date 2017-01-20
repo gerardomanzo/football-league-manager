@@ -19,7 +19,7 @@ public class PartiteManager {
 	public void creaPartita (Partita partita) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String query = "SELECT * FROM" +  PartiteManager.TABLE_PARTITE + "JOIN" + SquadreManager.TABLE_SQUADRE + "s1ON" + "ID_Casa=s1.ID_Squadra join " + SquadreManager.TABLE_SQUADRE + "s2ON" + "ID_Ospite=s2.ID_Squadra";
+		String query = "SELECT * FROM " +  PartiteManager.TABLE_PARTITE + " JOIN " + SquadreManager.TABLE_SQUADRE + " s1 ON " + " ID_Casa=s1.ID_Squadra JOIN " + SquadreManager.TABLE_SQUADRE + " s2 ON " + " ID_Ospite=s2.ID_Squadra";
 	
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
