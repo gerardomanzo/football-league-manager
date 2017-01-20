@@ -11,7 +11,7 @@ import flm.giocatori.Giocatore;
 import flm.storage.DriverManagerConnectionPool;
 
 public class SquadreManager {
-	private static final String TABLE_SQUADRE = "Squadra";
+	public static final String TABLE_SQUADRE = "Squadra";
 	private static final String TABLE_PARTECIPAZIONE = "Partecipazione";
 
 	public void creaSquadra(Squadra squadra) throws SQLException {
