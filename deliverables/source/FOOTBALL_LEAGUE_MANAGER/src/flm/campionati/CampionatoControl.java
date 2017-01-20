@@ -48,6 +48,22 @@ public class CampionatoControl extends HttpServlet{
 						dispatcher.forward(request, response);
 					}
 				}
+				else if (action.equalsIgnoreCase("getCampionati")){
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+
+					String ruolo = (String) session.getAttribute("ruolo");
+					if(utente != null && ruolo.equalsIgnoreCase("amministratore")) {
+						Collection<Campionato> campionati = modelCampionati.cercaCampionati();
+
+						request.removeAttribute("campionati");
+						request.setAttribute("campionati", campionati);
+
+						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/chiusuraCampionato.jsp");
+						dispatcher.forward(request, response);
+					}
+
+				}
 			}
 		}
 		catch(Exception e) {
@@ -80,6 +96,24 @@ public class CampionatoControl extends HttpServlet{
 						modelCampionati.creaCampionato(campionato);
 						
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				else if (action.equalsIgnoreCase("chiusuraCampionato")){
+					HttpSession session = request.getSession();
+
+					Utente utente = (Utente) session.getAttribute("utente");
+
+					String ruolo = (String) session.getAttribute("ruolo");
+					if(utente !=  null && ruolo.equalsIgnoreCase("amministratore")) {
+						int ID_Campionato = Integer.parseInt(request.getParameter("ID_Campionato"));
+
+						Campionato campionato = new Campionato();
+						campionato.setID(ID_Campionato);
+
+						modelCampionati.chiusuraCampionato(campionato);
+
+						RequestDispatcher dispatcher =  request.getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
 						dispatcher.forward(request, response);
 					}
 				}
