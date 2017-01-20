@@ -43,7 +43,7 @@
 							<div class="card-block">
 								<h4 class="card-title">Assegna arbitro</h4>
 								<p class="card-text">Assegna un arbitro ad una partita.</p>
-								<a href="#" class="btn btn-primary">Assegna!</a>
+								<a href="partite?action=assegnaArbitro" class="btn btn-primary">Assegna!</a>
 							</div>
 						</div>
 					</div>
