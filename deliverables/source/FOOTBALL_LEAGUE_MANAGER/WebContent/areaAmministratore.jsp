@@ -13,16 +13,14 @@
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Crea campionato</h4>
-								<p class="card-text">Crea un nuovo campionato e apre le
-									iscrizioni.</p>
+								<p class="card-text">Crea un nuovo campionato e apre le iscrizioni.</p>
 								<a href="creaCampionato.jsp" class="btn btn-primary">Crea!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Chiudi campionato</h4>
-								<p class="card-text">Chiudi un campionato e assegna il
-									premio al vincitore.</p>
+								<p class="card-text">Chiudi un campionato e assegna il premio al vincitore.</p>
 								<a href="#" class="btn btn-primary">Chiudi!</a>
 							</div>
 						</div>
@@ -71,8 +69,7 @@
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Modifica giocatore</h4>
-								<p class="card-text">Aggiorna le informazioni di un
-									giocatore.</p>
+								<p class="card-text">Aggiorna le informazioni di un giocatore.</p>
 								<a href="giocatori?action=getGiocatori" class="btn btn-primary">Modifica!</a>
 							</div>
 						</div>
