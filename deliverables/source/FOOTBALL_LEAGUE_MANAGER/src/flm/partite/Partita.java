@@ -2,6 +2,7 @@ package flm.partite;
 
 import java.util.GregorianCalendar;
 
+import flm.campionati.Campionato;
 import flm.squadre.Squadra;
 import flm.utenti.Arbitro;
 
@@ -11,6 +12,7 @@ public class Partita {
 	private int goalCasa;
 	private int goalOspite;
 	private GregorianCalendar data;
+	private Campionato campionato;
 	private Squadra squadraCasa;
 	private Squadra squadraOspite;
 	private Arbitro arbitro;
@@ -94,6 +96,20 @@ public class Partita {
 		this.data = data;
 	}
 	
+	/**
+	 * @return the campionato
+	 */
+	public Campionato getCampionato() {
+		return campionato;
+	}
+
+	/**
+	 * @param campionato the campionato to set
+	 */
+	public void setCampionato(Campionato campionato) {
+		this.campionato = campionato;
+	}
+
 	/**
 	 * @return the squadraCasa
 	 */
