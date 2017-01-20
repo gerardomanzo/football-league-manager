@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import flm.storage.DriverManagerConnectionPool;
 
@@ -131,5 +133,39 @@ public class UtentiManager {
 
 			DriverManagerConnectionPool.releaseConnection(connection);
 		}
+	}
+	
+	public Collection<Arbitro> leggiArbitri() throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		Collection<Arbitro> lista = new LinkedList<Arbitro>();
+		
+		String selectSQL = "SELECT * FROM " + UtentiManager.TABLE_UTENTI + " WHERE Ruolo = ?";
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();			
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			preparedStatement.setString(1, UtentiManager.RUOLO_ARBITRO);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Arbitro arbitro = new Arbitro();
+				arbitro.setID(rs.getInt("ID_Utente"));
+				arbitro.setNome(rs.getString("Nome"));
+				arbitro.setCognome(rs.getString("Cognome"));
+				
+				lista.add(arbitro);
+			}
+		}
+		finally {
+			if(preparedStatement != null)
+				preparedStatement.close();
+
+			DriverManagerConnectionPool.releaseConnection(connection);
+		}
+		
+		return lista;
 	}
 }
