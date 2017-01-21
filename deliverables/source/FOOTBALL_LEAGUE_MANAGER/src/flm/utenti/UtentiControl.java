@@ -18,7 +18,22 @@ public class UtentiControl extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		String action = request.getParameter("action");
+
+		try {
+			if(action.equalsIgnoreCase("logout")) {
+				HttpSession session = request.getSession();
+				
+				if(session != null)
+					session.invalidate();
+				
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+				dispatcher.forward(request, response);
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Error:" + e.getMessage());
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
