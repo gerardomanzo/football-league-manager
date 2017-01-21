@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import flm.squadre.Squadra;
+import flm.squadre.SquadreManager;
 import flm.storage.DriverManagerConnectionPool;
 
 public class CampionatiManager {
-	private static final String TABLE_CAMPIONATI = "Campionato";
+	public static final String TABLE_CAMPIONATI = "Campionato";
 
 	public void creaCampionato (Campionato campionato) throws SQLException {
 		Connection connection = null;
@@ -73,21 +75,50 @@ public class CampionatiManager {
 	public void chiusuraCampionato(Campionato campionato) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String deleteSQL= " DELETE FROM " + CampionatiManager.TABLE_CAMPIONATI + "WHERE ID_Campionato=? ";
+		String deleteSQL= " DELETE FROM " + CampionatiManager.TABLE_CAMPIONATI + " WHERE ID_Campionato=?";
+		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, campionato.getID());
 			preparedStatement.executeUpdate();
 			connection.commit();
-		} finally {
+		}
+		finally {
 			try {
 				if(preparedStatement != null)
 					preparedStatement.close();
-			} finally {
+			}
+			finally {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 
+	}
+
+	public void iscriviSquadra(Campionato campionato, Squadra squadra) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String query = "UPDATE " + SquadreManager.TABLE_SQUADRE + " SET ID_Campionato=?, StatoIscrizione=? WHERE ID_Squadra=?";
+
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, campionato.getID());
+			preparedStatement.setInt(2, Squadra.ATTESA_CONFERMA);
+			preparedStatement.setInt(3, squadra.getID());
+			preparedStatement.executeUpdate();
+			connection.commit();
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
 	}
 }
