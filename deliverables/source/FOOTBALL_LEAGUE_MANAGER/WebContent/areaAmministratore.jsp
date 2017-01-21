@@ -21,7 +21,7 @@
 							<div class="card-block">
 								<h4 class="card-title">Chiudi campionato</h4>
 								<p class="card-text">Chiudi un campionato e assegna il premio al vincitore.</p>
-								<a href="#" class="btn btn-primary">Chiudi!</a>
+								<a href="campionati?action=chiusuraCampionato" class="btn btn-primary">Chiudi!</a>
 							</div>
 						</div>
 					</div>

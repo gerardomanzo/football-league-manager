@@ -17,7 +17,7 @@
 					<div class="text-xs-center">
 						<h5>Iscrivi Squadra</h5>
 					</div>
-					<input type="hidden" name="action" value="iscriviSquadra">
+					<input type="hidden" name="action" value="iscrizioneSquadra">
 					<div class="form-group">
 						<select class="form-control" name="squadra">
 							<%
