@@ -6,6 +6,11 @@
 </head>
 <body>
 	<div class="container">
+		<%
+			String ruolo = (String) session.getAttribute("ruolo");
+			if (session.getAttribute("utente") != null && session.getAttribute("ruolo") != null
+					&& ruolo.equals("amministratore")) {
+		%>
 		<div class="row">
 			<div class="col-md-6">
 				<div class="card-deck-wrapper">
@@ -13,15 +18,18 @@
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Crea campionato</h4>
-								<p class="card-text">Crea un nuovo campionato e apre le iscrizioni.</p>
+								<p class="card-text">Crea un nuovo campionato e apre le
+									iscrizioni.</p>
 								<a href="creaCampionato.jsp" class="btn btn-primary">Crea!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Chiudi campionato</h4>
-								<p class="card-text">Chiudi un campionato e assegna il premio al vincitore.</p>
-								<a href="campionati?action=chiusuraCampionato" class="btn btn-primary">Chiudi!</a>
+								<p class="card-text">Chiudi un campionato e assegna il
+									premio al vincitore.</p>
+								<a href="campionati?action=chiusuraCampionato"
+									class="btn btn-primary">Chiudi!</a>
 							</div>
 						</div>
 					</div>
@@ -55,8 +63,9 @@
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Conferma squadra</h4>
-								<p class="card-text">Conferma l'iscrizione di una squdra.</p>
-								<a href="squadre?action=getSquadreConferma" class="btn btn-primary">Conferma!</a>
+								<p class="card-text">Conferma l'iscrizione di una squadra.</p>
+								<a href="squadre?action=getSquadreConferma"
+									class="btn btn-primary">Conferma!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
@@ -69,7 +78,8 @@
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Modifica giocatore</h4>
-								<p class="card-text">Aggiorna le informazioni di un giocatore.</p>
+								<p class="card-text">Aggiorna le informazioni di un
+									giocatore.</p>
 								<a href="giocatori?action=getGiocatori" class="btn btn-primary">Modifica!</a>
 							</div>
 						</div>
@@ -77,6 +87,15 @@
 				</div>
 			</div>
 		</div>
+		<%
+			} else {
+		%>
+		<div class="text-xs-center">
+			<div class="alert alert-warning" role="alert">
+				<strong>Devi prima effettuare l'accesso a Football League Manager.</strong> Ritorna alla <a href="index.jsp">Home</a>.
+			</div>
+		</div>
+		<%} %>
 	</div>
 </body>
 </html>
