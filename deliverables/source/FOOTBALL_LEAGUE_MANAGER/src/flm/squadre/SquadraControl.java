@@ -14,6 +14,7 @@ import flm.giocatori.Giocatore;
 import flm.giocatori.GiocatoreManager;
 import flm.utenti.Allenatore;
 import flm.utenti.Utente;
+
 public class SquadraControl extends HttpServlet{
 	private static final long serialVersionUID = -2530651357994741963L;
 	private static SquadreManager modelSquadre = new SquadreManager();
