@@ -62,7 +62,7 @@
 						<div class="card card-outline-success">
 							<div class="card-block">
 								<h4 class="card-title">Iscrivi giocatore</h4>
-								<p class="card-text">Iscrive un giocatore al sistema</p>
+								<p class="card-text">Iscrivi un giocatore al sistema</p>
 								<a href="iscrizioneGiocatore.jsp" class="btn btn-primary">Iscrivi!</a>
 							</div>
 						</div>
