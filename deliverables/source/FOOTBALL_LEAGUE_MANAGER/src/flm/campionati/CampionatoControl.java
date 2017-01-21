@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import flm.squadre.Squadra;
 import flm.squadre.SquadreManager;
 import flm.utenti.Utente;
+
 public class CampionatoControl extends HttpServlet{
 	private static final long serialVersionUID = -7083459725744424731L;
 	private static CampionatiManager modelCampionati = new CampionatiManager();
@@ -48,7 +49,7 @@ public class CampionatoControl extends HttpServlet{
 						dispatcher.forward(request, response);
 					}
 				}
-				else if (action.equalsIgnoreCase("getCampionati")){
+				else if (action.equalsIgnoreCase("chiusuraCampionato")){
 					HttpSession session = request.getSession();
 					Utente utente = (Utente) session.getAttribute("utente");
 
@@ -99,6 +100,28 @@ public class CampionatoControl extends HttpServlet{
 						dispatcher.forward(request, response);
 					}
 				}
+				else if(action.equalsIgnoreCase("iscrizioneSquadra")) {
+					HttpSession session = request.getSession();
+					Utente utente = (Utente) session.getAttribute("utente");
+														
+					String ruolo = (String) session.getAttribute("ruolo");
+					
+					if(utente != null && ruolo.equalsIgnoreCase("allenatore")) {
+						int id_squadra = Integer.parseInt(request.getParameter("squadra"));
+						int id_campionato = Integer.parseInt(request.getParameter("campionato"));
+						
+						Squadra squadra = new Squadra();
+						squadra.setID(id_squadra);
+						
+						Campionato campionato = new Campionato();
+						campionato.setID(id_campionato);
+						
+						modelCampionati.iscriviSquadra(campionato, squadra);
+						
+						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/areaAllenatore.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
 				else if (action.equalsIgnoreCase("chiusuraCampionato")){
 					HttpSession session = request.getSession();
 
@@ -106,10 +129,10 @@ public class CampionatoControl extends HttpServlet{
 
 					String ruolo = (String) session.getAttribute("ruolo");
 					if(utente !=  null && ruolo.equalsIgnoreCase("amministratore")) {
-						int ID_Campionato = Integer.parseInt(request.getParameter("ID_Campionato"));
+						int id_Campionato = Integer.parseInt(request.getParameter("campionato"));
 
 						Campionato campionato = new Campionato();
-						campionato.setID(ID_Campionato);
+						campionato.setID(id_Campionato);
 
 						modelCampionati.chiusuraCampionato(campionato);
 
