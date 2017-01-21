@@ -87,16 +87,11 @@ public class Campionato {
 	 * @throws MaxNumSquadreException se è stato raggiunto il max numero di squadre
 	 * @throws SquadraGiaIscrittaException se la squadra risulta già iscritta
 	 */
-	public void iscriviSquadra(Squadra squadra) throws MaxNumSquadreException, SquadraGiaIscrittaException {
-
-		if(squadre.size() == numSquadre)
-			throw new MaxNumSquadreException();
-
-		if(squadre.containsKey(squadra.getNomeSquadra()))
-			throw new SquadraGiaIscrittaException();
-
-		squadre.put(squadra.getNomeSquadra(), squadra);
-		squadra.iscriviSquadra();
+	public void iscriviSquadra(Squadra squadra) {
+		if(squadre.size() < numSquadre && !squadre.containsKey(squadra.getNomeSquadra())) {
+			squadre.put(squadra.getNomeSquadra(), squadra);
+			squadra.iscriviSquadra();
+		}
 	}
 
 	public Collection<Squadra> getSquadre()

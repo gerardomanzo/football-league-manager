@@ -177,29 +177,17 @@ public class Squadra {
 	
 	/** 
 	 * @param giocatore il giocatore da aggiungere alla rosa
-	 * @throws MaxNumGiocatoriException se la rosa ha raggiunto 8 giocatori
-	 * @throws GiocatoreGiaPresenteException se il giocatore è già presente in rosa
 	 */
-	public void aggiungiGiocatore(Giocatore giocatore) throws GiocatoreGiaPresenteException, MaxNumGiocatoriException {
-		
-		if(rosa.size() == 8)
-			throw new MaxNumGiocatoriException();
-		
-		if(rosa.contains(giocatore))
-			throw new GiocatoreGiaPresenteException();
-		
-		rosa.add(giocatore);
+	public void aggiungiGiocatore(Giocatore giocatore) {
+		if(rosa.size() < 8 && !rosa.contains(giocatore))
+			rosa.add(giocatore);
 	}
 	
 	/**
 	 * @param giocatore il giocatore da rimuovere dalla rosa
-	 * @throws GiocatoreNonPresenteException se il giocatore non è presente inn rosa
 	 */
-	public void rimuoviGiocatore(Giocatore giocatore) throws GiocatoreNonPresenteException {
-	
-		if(!rosa.contains(giocatore))
-			throw new GiocatoreNonPresenteException();
-		
-		rosa.remove(giocatore);
+	public void rimuoviGiocatore(Giocatore giocatore) {
+		if(rosa.contains(giocatore))
+			rosa.remove(giocatore);
 	}
 }
