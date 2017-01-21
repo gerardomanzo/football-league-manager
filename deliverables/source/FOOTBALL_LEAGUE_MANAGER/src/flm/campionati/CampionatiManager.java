@@ -72,6 +72,41 @@ public class CampionatiManager {
 
 		return campionati;
 	}
+	
+	public Collection<Squadra> getSquadreCampionato(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		Collection<Squadra> squadre = new LinkedList<Squadra>();
+		String selectSQL = "SELECT * FROM " + SquadreManager.TABLE_SQUADRE + " WHERE ID_Campionato=?";
+		
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while(rs.next()) {
+				Squadra squadra = new Squadra();
+				squadra.setID(rs.getInt("ID_Squadra"));
+				
+				squadre.add(squadra);
+			}
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return squadre;
+	}
+	
 	public void chiusuraCampionato(Campionato campionato) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
