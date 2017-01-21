@@ -85,4 +85,30 @@ public class PartiteManager {
 			}
 		}
 	}
+
+	public void salvaPartita(Partita partita) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String query = "INSERT INTO " + PartiteManager.TABLE_PARTITE + "(ID_Campionato, ID_Casa, ID_Ospite, Giornata) VALUES(?,?,?,?)";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, partita.getCampionato().getID());
+			preparedStatement.setInt(2, partita.getSquadraCasa().getID());
+			preparedStatement.setInt(3, partita.getSquadraOspite().getID());
+			preparedStatement.setInt(4, partita.getGiornata());
+			preparedStatement.executeUpdate();
+			connection.commit();
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
 }
