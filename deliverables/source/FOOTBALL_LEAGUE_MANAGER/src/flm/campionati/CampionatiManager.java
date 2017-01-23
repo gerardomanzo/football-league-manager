@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import flm.partite.Partita;
+import flm.partite.PartiteManager;
 import flm.squadre.Squadra;
 import flm.squadre.SquadreManager;
 import flm.storage.DriverManagerConnectionPool;
@@ -17,14 +19,13 @@ public class CampionatiManager {
 	public void creaCampionato (Campionato campionato) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String query = "INSERT INTO " + CampionatiManager.TABLE_CAMPIONATI + "(Nome,NumSquadre,Quota) VALUES(?,?,?)";
+		String query = "INSERT INTO " + CampionatiManager.TABLE_CAMPIONATI + "(Nome,NumSquadre) VALUES(?,?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, campionato.getNomeCampionato());
 			preparedStatement.setInt(2, campionato.getNumSquadre());
-			preparedStatement.setFloat(3, campionato.getQuota());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		}
@@ -55,7 +56,6 @@ public class CampionatiManager {
 				campionato.setID(rs.getInt("ID_Campionato"));
 				campionato.setNomeCampionato(rs.getString("Nome"));
 				campionato.setNumSquadre(rs.getInt("NumSquadre"));
-				campionato.setQuota(rs.getFloat("Quota"));
 
 				campionati.add(campionato);
 			}
@@ -78,7 +78,6 @@ public class CampionatiManager {
 		PreparedStatement preparedStatement = null;
 		Collection<Squadra> squadre = new LinkedList<Squadra>();
 		String selectSQL = "SELECT * FROM " + SquadreManager.TABLE_SQUADRE + " WHERE ID_Campionato=?";
-		
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -155,5 +154,53 @@ public class CampionatiManager {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+
+	public Campionato leggiCalendario(int id_campionato) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Campionato campionato = new Campionato();
+		String selectSQL = "SELECT * FROM " + CampionatiManager.TABLE_CAMPIONATI + " c NATURAL JOIN " + PartiteManager.TABLE_PARTITE + " JOIN " + SquadreManager.TABLE_SQUADRE + " s1 ON ID_Casa=s1.ID_squadra JOIN " + SquadreManager.TABLE_SQUADRE +  " s2 ON ID_Ospite=s2.ID_Squadra WHERE c.ID_Campionato=?";
+				
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id_campionato);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				campionato.setNomeCampionato(rs.getString("Nome"));
+				
+				Squadra squadraCasa = new Squadra();
+				squadraCasa.setNomeSquadra(rs.getString("s1.NomeSquadra"));
+				
+				Squadra squadraOspite = new Squadra();
+				squadraOspite.setNomeSquadra(rs.getString("s2.NomeSquadra"));
+				
+				Partita partita = new Partita();
+				partita.setCampionato(campionato);
+				partita.setCasa(squadraCasa);
+				partita.setOspite(squadraOspite);
+				partita.setData(rs.getDate("Data"));
+				partita.setGiornata(rs.getInt("Giornata"));
+				partita.setGoalCasa(rs.getInt("GoalCasa"));
+				partita.setGoalOspite(rs.getInt("GoalOspite"));
+				
+				campionato.aggiungiPartita(partita);
+			}
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return campionato;
 	}
 }

@@ -68,7 +68,24 @@ public class CampionatoControl extends HttpServlet{
 						RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/chiusuraCampionato.jsp");
 						dispatcher.forward(request, response);
 					}
-
+				}
+				else if(action.equalsIgnoreCase("visualizzaCalendario")) {
+					Collection<Campionato> campionati = modelCampionati.cercaCampionati();
+					
+					request.removeAttribute("campionati");
+					request.setAttribute("campionati", campionati);
+					
+					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/calendari.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(action.equalsIgnoreCase("visualizzaClassifica")) {
+					Collection<Campionato> campionati = modelCampionati.cercaCampionati();
+					
+					request.removeAttribute("campionati");
+					request.setAttribute("campionati", campionati);
+					
+					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/classifiche.jsp");
+					dispatcher.forward(request, response);
 				}
 			}
 		}
@@ -92,12 +109,10 @@ public class CampionatoControl extends HttpServlet{
 					if(utente != null && ruolo.equalsIgnoreCase("amministratore")) { 
 						String nome = request.getParameter("nomeCampionato");
 						int numeroSquadre = Integer.parseInt(request.getParameter("numSquadre"));
-						float quota = Float.parseFloat(request.getParameter("quotaIscrizione"));
 					
 						Campionato campionato = new Campionato();
 						campionato.setNomeCampionato(nome);
 						campionato.setNumSquadre(numeroSquadre);
-						campionato.setQuota(quota);
 							
 						modelCampionati.creaCampionato(campionato);
 						
@@ -149,6 +164,26 @@ public class CampionatoControl extends HttpServlet{
 						RequestDispatcher dispatcher =  request.getServletContext().getRequestDispatcher("/areaAmministratore.jsp");
 						dispatcher.forward(request, response);
 					}
+				}
+				else if(action.equalsIgnoreCase("visualizzaCalendario")) {
+					int id_campionato = Integer.parseInt(request.getParameter("campionato"));
+					
+					Campionato campionato = modelCampionati.leggiCalendario(id_campionato);
+					
+					request.removeAttribute("campionato");
+					request.setAttribute("campionato", campionato);
+					
+					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/visualizzaCalendario.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(action.equalsIgnoreCase("visualizzaClassifica")) {
+					Collection<Campionato> campionati = modelCampionati.cercaCampionati();
+					
+					request.removeAttribute("campionati");
+					request.setAttribute("campionati", campionati);
+					
+					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/classifiche.jsp");
+					dispatcher.forward(request, response);
 				}
 			}
 		}
