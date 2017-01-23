@@ -8,11 +8,12 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import flm.giocatori.Giocatore;
+import flm.partite.PartiteManager;
 import flm.storage.DriverManagerConnectionPool;
 
 public class SquadreManager {
 	public static final String TABLE_SQUADRE = "Squadra";
-	private static final String TABLE_PARTECIPAZIONE = "Partecipazione";
+	public static final String TABLE_PARTECIPAZIONE = "Partecipazione";
 
 	public void creaSquadra(Squadra squadra) throws SQLException {
 		Connection connection = null;
@@ -225,6 +226,53 @@ public class SquadreManager {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
 
+	public void salvaPartita(int id_partita, int goalCasa, int goalOspite) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement1 = null;
+		PreparedStatement preparedStatement2 = null;
+		String queryCasa = "";
+		String queryOspite = "";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			
+			if(goalCasa > goalOspite) {
+				queryCasa = "UPDATE " + SquadreManager.TABLE_SQUADRE + " SET Vittorie=Vittorie+1, GoalFatti=GoalFatti+?, GoalSubiti=GoalSubiti+? WHERE ID_Squadra=(SELECT ID_Casa FROM " + PartiteManager.TABLE_PARTITE + " WHERE ID_Partita=?)";
+				queryOspite = "UPDATE " + SquadreManager.TABLE_SQUADRE + " SET Sconfitte=Sconfitte+1, GoalFatti=GoalFatti+?, GoalSubiti=GoalSubiti+? WHERE ID_Squadra=(SELECT ID_Ospite FROM " + PartiteManager.TABLE_PARTITE + " WHERE ID_Partita=?)";
+			}
+			else if(goalCasa < goalOspite) {
+				queryCasa = "UPDATE " + SquadreManager.TABLE_SQUADRE + " SET Sconfitte=Sconfitte+1, GoalFatti=GoalFatti+?, GoalSubiti=GoalSubiti+? WHERE ID_Squadra=(SELECT ID_Casa FROM " + PartiteManager.TABLE_PARTITE + " WHERE ID_Partita=?)";
+				queryOspite = "UPDATE " + SquadreManager.TABLE_SQUADRE + " SET Vittorie=Vittorie+1, GoalFatti=GoalFatti+?, GoalSubiti=GoalSubiti+? WHERE ID_Squadra=(SELECT ID_Ospite FROM " + PartiteManager.TABLE_PARTITE + " WHERE ID_Partita=?)";
+			}
+			else {
+				queryCasa = "UPDATE " + SquadreManager.TABLE_SQUADRE + " SET Pareggi=Pareggi+1, GoalFatti=GoalFatti+?, GoalSubiti=GoalSubiti+? WHERE ID_Squadra=(SELECT ID_Casa FROM " + PartiteManager.TABLE_PARTITE + " WHERE ID_Partita=?)";
+				queryOspite = "UPDATE " + SquadreManager.TABLE_SQUADRE + " SET Pareggi=Pareggi+1, GoalFatti=GoalFatti+?, GoalSubiti=GoalSubiti+? WHERE ID_Squadra=(SELECT ID_Ospite FROM " + PartiteManager.TABLE_PARTITE + " WHERE ID_Partita=?)";
+			}
+			
+			preparedStatement1 = connection.prepareStatement(queryCasa);
+			preparedStatement2 = connection.prepareStatement(queryOspite);
+			preparedStatement1.setInt(1, goalCasa);
+			preparedStatement1.setInt(2, goalOspite);
+			preparedStatement2.setInt(1, goalOspite);
+			preparedStatement2.setInt(2, goalCasa);
+			preparedStatement1.setInt(3, id_partita);
+			preparedStatement2.setInt(3, id_partita);
+			preparedStatement1.executeUpdate();
+			preparedStatement2.executeUpdate();
+			connection.commit();
+		}
+		finally {
+			try {
+				if(preparedStatement1 != null)
+					preparedStatement1.close();
+				if(preparedStatement2 != null)
+					preparedStatement2.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
 	}
 }

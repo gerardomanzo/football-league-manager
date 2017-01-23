@@ -1,6 +1,6 @@
 package flm.partite;
 
-import java.util.GregorianCalendar;
+import java.sql.Date;
 
 import flm.campionati.Campionato;
 import flm.squadre.Squadra;
@@ -11,7 +11,7 @@ public class Partita {
 	private int giornata;
 	private int goalCasa;
 	private int goalOspite;
-	private GregorianCalendar data;
+	private Date data;
 	private Campionato campionato;
 	private Squadra squadraCasa;
 	private Squadra squadraOspite;
@@ -85,15 +85,15 @@ public class Partita {
 	/**
 	 * @return the data
 	 */
-	public GregorianCalendar getData() {
+	public Date getData() {
 		return data;
 	}
 
 	/**
-	 * @param data the data to set
+	 * @param data2 the data to set
 	 */
-	public void setData(GregorianCalendar data) {
-		this.data = data;
+	public void setData(Date data2) {
+		this.data = data2;
 	}
 	
 	/**

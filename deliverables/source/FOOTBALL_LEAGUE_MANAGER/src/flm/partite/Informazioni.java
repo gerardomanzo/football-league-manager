@@ -1,5 +1,7 @@
 package flm.partite;
 
+import flm.giocatori.Giocatore;
+
 public class Informazioni {
 	private int id;
 	private int goal;
@@ -7,6 +9,9 @@ public class Informazioni {
 	private int cartellino;
 	private int squalifica;
 	private String motivazione;
+	
+	private Partita partita;
+	private Giocatore giocatore;
 	
 	static final int NESSUN_CARTELLINO = 0;
 	static final int GIALLO = 1;
@@ -104,5 +109,33 @@ public class Informazioni {
 	 */
 	public void setMotivazione(String motivazione) {
 		this.motivazione = motivazione;
+	}
+
+	/**
+	 * @return the giocatore
+	 */
+	public Giocatore getGiocatore() {
+		return giocatore;
+	}
+
+	/**
+	 * @param giocatore the giocatore to set
+	 */
+	public void setGiocatore(Giocatore giocatore) {
+		this.giocatore = giocatore;
+	}
+
+	/**
+	 * @return the partita
+	 */
+	public Partita getPartita() {
+		return partita;
+	}
+	
+	/**
+	 * @param partita the partita to set
+	 */
+	public void setPartita(Partita partita) {
+		this.partita = partita;
 	}
 }
