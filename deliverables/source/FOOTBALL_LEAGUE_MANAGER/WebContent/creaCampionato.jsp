@@ -29,10 +29,6 @@
 							<input type="text" class="form-control" id="numSquadre"
 								name="numSquadre" placeholder="Squadre partecipanti">
 						</div>
-						<div class="input-group">
-							<input type="text" class="form-control" id="quotaIscrizione"
-								name="quotaIscrizione" placeholder="Quota iscrizione">
-						</div>
 					</div>
 					<input type="submit" class="btn btn-primary"
 						value="Crea campionato">
