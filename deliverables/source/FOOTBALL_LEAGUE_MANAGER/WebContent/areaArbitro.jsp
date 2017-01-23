@@ -19,7 +19,7 @@
 							<div class="card-block">
 								<h4 class="card-title">Registra referto</h4>
 								<p class="card-text">Registra il referto di una partita.</p>
-								<a href="#" class="btn btn-primary">Registra!</a>
+								<a href="partite?action=registrazioneReferto" class="btn btn-primary">Registra!</a>
 							</div>
 						</div>
 					</div>
