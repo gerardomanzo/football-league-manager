@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import flm.storage.DriverManagerConnectionPool;
 
 public class GiocatoreManager {
-	private static final String TABLE_GIOCATORI = "Giocatore";
+	public static final String TABLE_GIOCATORI = "Giocatore";
 
 	public void modificaGiocatore(Giocatore giocatore,String nome,String cognome) throws SQLException{
 		Connection connection = null;
