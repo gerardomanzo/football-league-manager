@@ -19,10 +19,6 @@ import flm.utenti.Utente;
 import flm.utenti.UtentiManager;
 
 public class PartitaControl extends HttpServlet{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9143690296317818235L;
 	private static PartiteManager modelPartite = new PartiteManager();
 	private static UtentiManager modelUtenti = new UtentiManager();
