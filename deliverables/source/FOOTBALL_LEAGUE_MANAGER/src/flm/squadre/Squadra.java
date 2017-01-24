@@ -3,6 +3,7 @@ package flm.squadre;
 import java.util.HashSet;
 import java.util.Set;
 
+import flm.campionati.Campionato;
 import flm.giocatori.Giocatore;
 import flm.utenti.Allenatore;
 
@@ -17,6 +18,7 @@ public class Squadra {
 	private int statoIscrizione;
 	private Allenatore allenatore;
 	private Set<Giocatore> rosa;
+	private Campionato campionato;
 	
 	public static final int NESSUNA_ISCRIZIONE = 0;
 	public static final int ATTESA_CONFERMA = 1;
@@ -33,6 +35,7 @@ public class Squadra {
 		this.statoIscrizione = NESSUNA_ISCRIZIONE;
 		this.allenatore = null;
 		this.rosa = new HashSet<Giocatore>();
+		this.campionato = null;
 	}
 
 	/**
@@ -190,4 +193,13 @@ public class Squadra {
 		if(rosa.contains(giocatore))
 			rosa.remove(giocatore);
 	}
+	
+	public Campionato getCampionato() {
+		return campionato;
+	}
+
+	public void setCampionato(Campionato campionato) {
+		this.campionato = campionato;
+	}
+
 }

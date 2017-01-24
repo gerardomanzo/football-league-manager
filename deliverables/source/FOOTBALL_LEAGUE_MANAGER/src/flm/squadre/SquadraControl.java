@@ -84,6 +84,21 @@ public class SquadraControl extends HttpServlet{
 						dispatcher.forward(request, response);
 					}
 				}
+				else if(action.equalsIgnoreCase("visualizzaRosa")) {
+					Collection<Squadra> squadre = modelSquadre.trovaSquadre();
+					
+					request.removeAttribute("squadre");
+					request.setAttribute("squadre", squadre);
+					
+					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/rosa.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(action.equalsIgnoreCase("leggiRosa")){
+					int id= Integer.parseInt(request.getParameter("ID_squadra"));
+					modelSquadre.leggiRosa(id);
+					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/visualizzaRosa.jsp");
+					dispatcher.forward(request, response);
+				}
 			}
 		}
 		catch(Exception e) {

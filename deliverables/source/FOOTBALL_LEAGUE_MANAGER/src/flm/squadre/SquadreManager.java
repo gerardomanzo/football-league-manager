@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import flm.campionati.CampionatiManager;
+import flm.campionati.Campionato;
 import flm.giocatori.Giocatore;
+import flm.giocatori.GiocatoreManager;
 import flm.partite.PartiteManager;
 import flm.storage.DriverManagerConnectionPool;
 
@@ -274,5 +277,69 @@ public class SquadreManager {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+	public Collection<Squadra> trovaSquadre() throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "SELECT * FROM " + SquadreManager.TABLE_SQUADRE + " NATURAL JOIN " + CampionatiManager.TABLE_CAMPIONATI;
+		Collection<Squadra> lista = new LinkedList<Squadra>();
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while(rs.next()) {
+				Campionato campionato = new Campionato();
+				Squadra squadra = new Squadra();
+				campionato.setNomeCampionato(rs.getString("Nome"));
+				squadra.setCampionato(campionato);
+				lista.add(squadra);
+			}
+
+		}
+		finally {
+			try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+			}
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return lista;
+
+	}
+
+	public Squadra leggiRosa(int id) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "SELECT * FROM" + SquadreManager.TABLE_SQUADRE+ " NATURAL JOIN " + CampionatiManager.TABLE_CAMPIONATI + " NATURAL JOIN "  + SquadreManager.TABLE_PARTECIPAZIONE + " NATURAL JOIN" + GiocatoreManager.TABLE_GIOCATORI+" WHERE ID_Squadra = ? ";
+		Squadra squadra = new Squadra();
+		try{
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+			Campionato campionato = new Campionato();
+			squadra.setCampionato(campionato);
+			while (rs.next()){
+				campionato.setNomeCampionato(rs.getString("Nome"));
+				squadra.setNomeSquadra(rs.getString("NomeSquadra"));
+				Giocatore giocatore = new Giocatore();
+				giocatore.setNome(rs.getString("Nome"));
+				giocatore.setCognome(rs.getString("Cognome"));
+				squadra.aggiungiGiocatore(giocatore);
+			}
+		}finally {
+			try{
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return squadra;
 	}
 }
