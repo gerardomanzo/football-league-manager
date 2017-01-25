@@ -11,6 +11,7 @@
 			if (session.getAttribute("utente") != null && session.getAttribute("ruolo") != null
 					&& ruolo.equals("arbitro")) {
 		%>
+		<%@ include file="header.html"%>
 		<div class="row">
 			<div class="col-md-4 offset-md-4">
 				<div class="card-deck-wrapper">

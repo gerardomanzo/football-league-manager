@@ -11,6 +11,7 @@
 			if (session.getAttribute("utente") != null && session.getAttribute("ruolo") != null
 					&& ruolo.equals("allenatore")) {
 		%>
+		<%@ include file="header.html"%>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card-deck-wrapper">
@@ -62,7 +63,7 @@
 							<div class="card-block">
 								<h4 class="card-title">Visualizza rosa</h4>
 								<p class="card-text">Visualizza la rosa di una squadra.</p>
-								<a href="#" class="btn btn-primary">Visualizza!</a>
+								<a href="squadre?action=visualizzaRosa" class="btn btn-primary">Visualizza!</a>
 							</div>
 						</div>
 						<div class="card card-outline-success">
