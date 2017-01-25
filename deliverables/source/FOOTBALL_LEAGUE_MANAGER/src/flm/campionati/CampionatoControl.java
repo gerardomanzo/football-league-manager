@@ -3,7 +3,9 @@ package flm.campionati;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -177,12 +179,16 @@ public class CampionatoControl extends HttpServlet{
 					dispatcher.forward(request, response);
 				}
 				else if(action.equalsIgnoreCase("visualizzaClassifica")) {
-					Collection<Campionato> campionati = modelCampionati.cercaCampionati();
+					int id_campionato = Integer.parseInt(request.getParameter("campionato"));
+										
+					List<Squadra> squadre = (List<Squadra>) modelCampionati.getSquadreCampionato(id_campionato);
+										
+					Collections.sort(squadre, new SquadreComparator());
 					
-					request.removeAttribute("campionati");
-					request.setAttribute("campionati", campionati);
+					request.removeAttribute("classifica");
+					request.setAttribute("classifica", squadre);
 					
-					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/classifiche.jsp");
+					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/visualizzaClassifica.jsp");
 					dispatcher.forward(request, response);
 				}
 			}
