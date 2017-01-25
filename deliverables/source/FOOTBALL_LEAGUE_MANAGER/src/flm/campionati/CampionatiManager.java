@@ -89,6 +89,12 @@ public class CampionatiManager {
 			while(rs.next()) {
 				Squadra squadra = new Squadra();
 				squadra.setID(rs.getInt("ID_Squadra"));
+				squadra.setNomeSquadra(rs.getString("NomeSquadra"));
+				squadra.setVittorie(rs.getInt("Vittorie"));
+				squadra.setPareggi(rs.getInt("Pareggi"));
+				squadra.setSconfitte(rs.getInt("Sconfitte"));
+				squadra.setGoalFatti(rs.getInt("GoalFatti"));
+				squadra.setGoalSubiti(rs.getInt("GoalSubiti"));
 				
 				squadre.add(squadra);
 			}
