@@ -1,7 +1,7 @@
 package flm.squadre;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import flm.campionati.Campionato;
 import flm.giocatori.Giocatore;
@@ -17,7 +17,7 @@ public class Squadra {
 	private int goalSubiti;
 	private int statoIscrizione;
 	private Allenatore allenatore;
-	private Set<Giocatore> rosa;
+	private Collection<Giocatore> rosa;
 	private Campionato campionato;
 	
 	public static final int NESSUNA_ISCRIZIONE = 0;
@@ -34,7 +34,7 @@ public class Squadra {
 		this.goalSubiti = 0;
 		this.statoIscrizione = NESSUNA_ISCRIZIONE;
 		this.allenatore = null;
-		this.rosa = new HashSet<Giocatore>();
+		this.rosa = new ArrayList<Giocatore>();
 		this.campionato = null;
 	}
 
@@ -174,7 +174,7 @@ public class Squadra {
 	/**
 	 * @return the rosa
 	 */
-	public Set<Giocatore> getRosa() {
+	public Collection<Giocatore> getRosa() {
 		return rosa;
 	}
 	
