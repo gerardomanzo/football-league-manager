@@ -18,7 +18,7 @@
 						<strong>Creazione Squadra</strong>
 					</h2>
 				</div>
-				<form action="squadre" method="post">
+				<form action="squadre" method="post" name="creaSquadra" onsubmit="return(insertSquadraCheck())">
 					<input type="hidden" name="action" value="creaSquadra">
 					<div class="form-group">
 						<div class="input-group">

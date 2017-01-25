@@ -25,7 +25,7 @@
 				<%
 					if (giocatori != null && giocatori.size() > 0) {
 				%>
-				<form action="giocatori" method="post">
+				<form action="giocatori" method="post" name="modificaGiocatore" onsubmit="return(updateGiocatoreCheck())">
 					<input type="hidden" name="action" value="modificaGiocatore">
 					<div class="form-group">
 						<select class="form-control" name="giocatore">

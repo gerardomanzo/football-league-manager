@@ -18,7 +18,7 @@
 						<strong>Creazione Campionato</strong>
 					</h2>
 				</div>
-				<form action="campionati" method="post">
+				<form action="campionati" method="post" name="creaCampionato" onsubmit="return(insertCampionatoCheck())">
 					<div class="form-group">
 						<input type="hidden" name="action" value="creaCampionato">
 						<div class="input-group">

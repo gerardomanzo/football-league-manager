@@ -15,7 +15,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 offset-md-1">
-				<form action="utenti" method="post" class="col-md-12">
+				<form action="utenti" method="post" class="col-md-12" name="login" onsubmit="return(loginCheck())">
 					<div class="text-xs-center">
 						<h5>Accedi a FLM</h5>
 					</div>

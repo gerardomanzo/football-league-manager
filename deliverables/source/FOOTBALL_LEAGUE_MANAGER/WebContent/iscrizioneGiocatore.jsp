@@ -18,7 +18,7 @@
 						<strong>Iscrizione Giocatore</strong>
 					</h2>
 				</div>
-				<form action="giocatori" method="post">
+				<form action="giocatori" method="post" name="inserimentoGiocatore" onsubmit="return(insertGiocatoreCheck())">
 					<div class="form-group">
 						<input type="hidden" name="action" value="iscrizioneGiocatore">
 						<div class="input-group">

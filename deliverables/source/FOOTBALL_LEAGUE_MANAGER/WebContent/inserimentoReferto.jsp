@@ -29,7 +29,7 @@
 				<%
 					if (rosaCasa != null && rosaCasa.size() > 0 && rosaOspite != null && rosaOspite.size() > 0) {
 				%>
-				<form action="partite" method="post">
+				<form action="partite" method="post" name="inserimentoReferto" onsubmit="return(insertRefertoCheck())">
 					<input type="hidden" name="action" value="inserimentoReferto">
 					<input type="hidden" name="partita" value="<%=id_partita%>">
 					<div class="input-group">

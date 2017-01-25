@@ -18,7 +18,7 @@
 						<strong>Registrazione Arbitro</strong>
 					</h2>
 				</div>
-				<form action="utenti" method="post">
+				<form action="utenti" method="post" name="registrazione" onsubmit="return(registerCheck())">
 					<div class="form-group">
 						<input type="hidden" name="action" value="registrazioneArbitro">
 						<div class="input-group">
