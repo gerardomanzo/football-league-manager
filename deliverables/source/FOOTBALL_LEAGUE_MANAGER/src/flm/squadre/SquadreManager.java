@@ -290,8 +290,11 @@ public class SquadreManager {
 
 			while(rs.next()) {
 				Campionato campionato = new Campionato();
-				Squadra squadra = new Squadra();
 				campionato.setNomeCampionato(rs.getString("Nome"));
+				
+				Squadra squadra = new Squadra();
+				squadra.setID(rs.getInt("ID_Squadra"));
+				squadra.setNomeSquadra(rs.getString("NomeSquadra"));
 				squadra.setCampionato(campionato);
 				lista.add(squadra);
 			}
@@ -314,7 +317,7 @@ public class SquadreManager {
 	public Squadra leggiRosa(int id) throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String selectSQL = "SELECT * FROM" + SquadreManager.TABLE_SQUADRE+ " NATURAL JOIN " + CampionatiManager.TABLE_CAMPIONATI + " NATURAL JOIN "  + SquadreManager.TABLE_PARTECIPAZIONE + " NATURAL JOIN" + GiocatoreManager.TABLE_GIOCATORI+" WHERE ID_Squadra = ? ";
+		String selectSQL = "SELECT * FROM " + CampionatiManager.TABLE_CAMPIONATI + " c NATURAL JOIN " + SquadreManager.TABLE_SQUADRE + " NATURAL JOIN "  + SquadreManager.TABLE_PARTECIPAZIONE + " p JOIN " + GiocatoreManager.TABLE_GIOCATORI+" g ON p.ID_Giocatore=g.ID_Giocatore WHERE ID_Squadra = ? ORDER BY g.cognome, g.nome";
 		Squadra squadra = new Squadra();
 		try{
 			connection = DriverManagerConnectionPool.getConnection();
@@ -324,11 +327,13 @@ public class SquadreManager {
 			Campionato campionato = new Campionato();
 			squadra.setCampionato(campionato);
 			while (rs.next()){
-				campionato.setNomeCampionato(rs.getString("Nome"));
+				campionato.setNomeCampionato(rs.getString("c.Nome"));
 				squadra.setNomeSquadra(rs.getString("NomeSquadra"));
+				
 				Giocatore giocatore = new Giocatore();
-				giocatore.setNome(rs.getString("Nome"));
-				giocatore.setCognome(rs.getString("Cognome"));
+				giocatore.setNome(rs.getString("g.Nome"));
+				giocatore.setCognome(rs.getString("g.Cognome"));
+				
 				squadra.aggiungiGiocatore(giocatore);
 			}
 		}finally {

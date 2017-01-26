@@ -94,8 +94,12 @@ public class SquadraControl extends HttpServlet{
 					dispatcher.forward(request, response);
 				}
 				else if(action.equalsIgnoreCase("leggiRosa")){
-					int id= Integer.parseInt(request.getParameter("ID_squadra"));
-					modelSquadre.leggiRosa(id);
+					int id = Integer.parseInt(request.getParameter("squadra"));
+					Squadra squadra = modelSquadre.leggiRosa(id);
+					
+					request.removeAttribute("squadra");
+					request.setAttribute("squadra", squadra);
+					
 					RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/visualizzaRosa.jsp");
 					dispatcher.forward(request, response);
 				}
