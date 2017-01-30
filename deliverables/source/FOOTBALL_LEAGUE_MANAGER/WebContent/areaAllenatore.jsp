@@ -11,7 +11,7 @@
 			if (session.getAttribute("utente") != null && session.getAttribute("ruolo") != null
 					&& ruolo.equals("allenatore")) {
 		%>
-		<%@ include file="header.html"%>
+		<%@ include file="header.jsp"%>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card-deck-wrapper">
@@ -90,7 +90,7 @@
 		%>
 		<div class="text-xs-center">
 			<div class="alert alert-warning" role="alert">
-				<strong>Non sei loggato.</strong> Ritorna alla <a href="index.jsp">Home</a>.
+				<strong>Non sei loggatoDevi prima effettuare l'accesso a Football League Manager.</strong> Ritorna alla <a href="index.jsp">Home</a>.
 			</div>
 		</div>
 		<%

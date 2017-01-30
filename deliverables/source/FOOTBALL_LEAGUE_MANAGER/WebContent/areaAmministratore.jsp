@@ -11,7 +11,7 @@
 			if (session.getAttribute("utente") != null && session.getAttribute("ruolo") != null
 					&& ruolo.equals("amministratore")) {
 		%>
-		<%@ include file="header.html"%>
+		<%@ include file="header.jsp"%>
 		<div class="row">
 			<div class="col-md-6">
 				<div class="card-deck-wrapper">
