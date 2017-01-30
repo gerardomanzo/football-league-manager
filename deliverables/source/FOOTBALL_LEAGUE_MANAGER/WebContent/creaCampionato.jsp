@@ -48,5 +48,6 @@
 			}
 		%>
 	</div>
+	<script type="text/javascript" src="js/insertCampionatoCheck.js"></script>
 </body>
 </html>

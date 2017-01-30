@@ -65,5 +65,6 @@
 			}
 		%>
 	</div>
+	<script type="text/javascript" src="js/registerCheck.js"></script>
 </body>
 </html>

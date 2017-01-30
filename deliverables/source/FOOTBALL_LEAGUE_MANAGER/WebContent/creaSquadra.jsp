@@ -43,5 +43,6 @@
 			}
 		%>
 	</div>
+	<script type="text/javascript" src="js/insertSquadraCheck.js"></script>
 </body>
 </html>

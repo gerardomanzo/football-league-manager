@@ -6,33 +6,42 @@ function registerCheck() {
 	var passwordrip = document.registrazione.passwordRip.value;
 	
 	if(nome == "" || nome == null){
-		alert ("Campo nome obbligatorio");
+		document.registrazione.nome.style.borderColor = "red";
 		document.registrazione.nome.focus();
 		return false;
 	}
 	
 	if (cognome == "" || cognome == null){
-		alert ("Campo cognome obbligatorio");
+		document.registrazione.cognome.style.borderColor = "red";
 		document.registrazione.cognome.focus();
 		return false;
 	}
 	
 	if(email == "" || email == null){
-		alert ("Campo email obbligatorio");
+		document.registrazione.email.style.borderColor = "red";
 		document.registrazione.email.focus();
 		return false;
 	}
 	
 	if(password == "" || password == null){
-		alert ("Campo password obbligatorio");
-		document.registrazione.password.focus()
+		document.registrazione.password.style.borderColor = "red";
+		document.registrazione.password.focus();
 		return false;
 	}
 	
 	if(passwordrip == "" || passwordrip == null){
-		alert ("Campo ripeti password obbligatorio");
-		document.registrazione.passwordRip.value;
-		return false;
+			document.registrazione.passwordRip.style.borderColor = "red";
+			document.registrazione.passwordRip.focus();
+			return false;
+	}
+	else if (passwordrip != "" || passwordrip != null ) {
+		if((passwordrip !== password) == true){
+			alert("Le passoword devono essere uguali");
+			document.registrazione.passwordRip.style.borderColor = "red";
+			document.registrazione.passwordRip.focus();
+			return false;
+		}
 	}
 	document.registrazione.submit();
 };
+

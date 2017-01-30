@@ -3,13 +3,13 @@ function updateGiocatoreCheck(){
 	var nuovoCognome = document.modificaGiocatore.nuovoCognome.value;
 	
 	if(nuovoNome == "" || nuovoNome == null){
-		alert ("Campo nuovo nome obbligatorio");
+		document.modificaGiocatore.nuovoNome.style.borderColor = "red";
 		document.modificaGiocatore.nuovoNome.focus();
 		return false;
 	}
 	
 	if(nuovoCognome == "" || nuovoCognome ==  null){
-		alert ("Campo nuovo cognome obbligatorio");
+		document.modificaGiocatore.nuovoCognome.style.borderColor = "red";
 		document.modificaGiocatore.nuovoCognome.focus();
 		return false;
 	}

@@ -149,5 +149,6 @@
 			}
 		%>
 	</div>
+	<script type="text/javascript" src="js/insertRefertoCheck.js"></script>
 </body>
 </html>

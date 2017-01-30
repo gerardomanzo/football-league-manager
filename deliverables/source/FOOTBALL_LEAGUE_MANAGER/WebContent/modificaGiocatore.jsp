@@ -78,5 +78,6 @@
 			}
 		%>
 	</div>
+	<script type="text/javascript" src="js/updateGiocatoreCheck.js"></script>
 </body>
 </html>

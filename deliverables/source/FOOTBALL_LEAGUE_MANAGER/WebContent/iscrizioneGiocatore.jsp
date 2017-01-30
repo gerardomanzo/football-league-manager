@@ -47,5 +47,6 @@
 			}
 		%>
 	</div>
+	<script type="text/javascript" src="js/insertGiocatoreCheck.js" ></script>
 </body>
 </html>

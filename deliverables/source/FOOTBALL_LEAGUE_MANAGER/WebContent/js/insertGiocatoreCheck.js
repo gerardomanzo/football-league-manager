@@ -3,13 +3,13 @@ function insertGiocatoreCheck() {
 	var cognomeGiocatore = document.inserimentoGiocatore.cognomeGiocatore.value;
 	
 	if(nomeGiocatore == "" || nomeGiocatore == null){
-		alert ("Campo nome giocatore obbligatorio");
+		document.inserimentoGiocatore.nomeGiocatore.style.borderColor = "red";
 		document.inserimentoGiocatore.nomeGiocatore.focus();
 		return false;
 	}
 	
 	if(cognomeGiocatore == "" || cognomeGiocatore == null){
-		alert ("Campo cognome giocatore obbligatorio");
+		document.inserimentoGiocatore.cognomeGiocatore.style.borderColor = "red";
 		document.inserimentoGiocatore.cognomeGiocatore.focus();
 		return false;
 	}

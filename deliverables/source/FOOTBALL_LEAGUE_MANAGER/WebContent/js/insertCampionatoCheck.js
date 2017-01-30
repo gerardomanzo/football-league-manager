@@ -3,13 +3,13 @@ function insertCampionatoCheck(){
 	var numSquadre = document.creaCampionato.numSquadre.value;
 	
 	if(nomeCampionato == "" || nomeCampionato == null){
-		alert("Campo nome campionato obbligatorio");
+		document.creaCampionato.nomeCampionato.style.borderColor = "red";
 		document.creaCampionato.nomeCampionato.focus();
 		return false;
 	}
 	
 	if(numSquadre == "" || numSquadre == null){
-		alert("Campo numero squadre obbligatorio");
+		document.creaCampionato.numSquadre.style.borderColor = "red";
 		document.creaCampionato.numSquadre.focus();
 		return false;
 	}
