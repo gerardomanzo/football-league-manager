@@ -10,7 +10,7 @@
 			<div class="col-md-5 offset-md-1">
 				<div class="jumbotron jumbotron-fluid">
 					<div class="container">
-						<h1 class="text-xs-center">Football League Manager</h1>
+						<h3 class="text-xs-center">Football League Manager</h3>
 					</div>
 				</div>
 			</div>
@@ -47,6 +47,5 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/loginCheck.js"></script>
 </body>
 </html>
