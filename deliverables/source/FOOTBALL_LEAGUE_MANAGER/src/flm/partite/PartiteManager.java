@@ -116,7 +116,7 @@ public class PartiteManager {
 		}
 	}
 
-	public Collection<Partita> ceraPartiteArbitro(int id) throws SQLException {
+	public Collection<Partita> cercaPartiteArbitro(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<Partita> partite = new LinkedList<Partita>();

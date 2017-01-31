@@ -61,7 +61,7 @@ public class PartitaControl extends HttpServlet{
 					String ruolo = (String) session.getAttribute("ruolo");
 
 					if(utente != null && ruolo.equalsIgnoreCase("arbitro")) {
-						Collection<Partita> partite = modelPartite.ceraPartiteArbitro(utente.getID());
+						Collection<Partita> partite = modelPartite.cercaPartiteArbitro(utente.getID());
 						
 						request.removeAttribute("partite");
 						request.setAttribute("partite", partite);
