@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `footballleaguemanager` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `footballleaguemanager`;
--- MySQL dump 10.13  Distrib 5.7.13, for linux-glibc2.5 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: footballleaguemanager
 -- ------------------------------------------------------
--- Server version	5.7.16-0ubuntu0.16.04.1
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,9 +26,9 @@ CREATE TABLE `Campionato` (
   `ID_Campionato` int(5) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(25) NOT NULL,
   `NumSquadre` int(5) NOT NULL,
-  `Quota` float NOT NULL,
-  PRIMARY KEY (`ID_Campionato`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID_Campionato`),
+  UNIQUE KEY `Nome_UNIQUE` (`Nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +43,7 @@ CREATE TABLE `Giocatore` (
   `Nome` varchar(25) NOT NULL,
   `Cognome` varchar(25) NOT NULL,
   PRIMARY KEY (`ID_Giocatore`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,9 +61,10 @@ CREATE TABLE `Informazioni` (
   `Cartellino` int(5) NOT NULL,
   `Motivazione` varchar(30) NOT NULL,
   `Squalifica` int(5) NOT NULL,
+  UNIQUE KEY `ID_Partita` (`ID_Partita`,`ID_Giocatore`),
   KEY `Informazioni_ibfk_1` (`ID_Partita`),
   KEY `Informazioni_ibfk_2` (`ID_Giocatore`),
-  CONSTRAINT `Informazioni_ibfk_1` FOREIGN KEY (`ID_Partita`) REFERENCES `Partita` (`ID_Partita`),
+  CONSTRAINT `Informazioni_ibfk_1` FOREIGN KEY (`ID_Partita`) REFERENCES `Partita` (`ID_Partita`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `Informazioni_ibfk_2` FOREIGN KEY (`ID_Giocatore`) REFERENCES `Giocatore` (`ID_Giocatore`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -80,9 +79,10 @@ DROP TABLE IF EXISTS `Partecipazione`;
 CREATE TABLE `Partecipazione` (
   `ID_Squadra` int(5) NOT NULL,
   `ID_Giocatore` int(5) NOT NULL,
+  UNIQUE KEY `ID_Squadra` (`ID_Squadra`,`ID_Giocatore`),
   KEY `Partecipazione_ibfk_1` (`ID_Squadra`),
   KEY `Partecipazione_ibfk_2` (`ID_Giocatore`),
-  CONSTRAINT `Partecipazione_ibfk_1` FOREIGN KEY (`ID_Squadra`) REFERENCES `Squadra` (`ID_Squadra`),
+  CONSTRAINT `Partecipazione_ibfk_1` FOREIGN KEY (`ID_Squadra`) REFERENCES `Squadra` (`ID_Squadra`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `Partecipazione_ibfk_2` FOREIGN KEY (`ID_Giocatore`) REFERENCES `Giocatore` (`ID_Giocatore`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -109,11 +109,11 @@ CREATE TABLE `Partita` (
   KEY `Partita_ibfk_3` (`ID_Casa`),
   KEY `Partita_ibfk_4` (`ID_Ospite`),
   KEY `Partita_ibfk_2` (`ID_Arbitro`),
-  CONSTRAINT `Partita_ibfk_1` FOREIGN KEY (`ID_Campionato`) REFERENCES `Campionato` (`ID_Campionato`),
-  CONSTRAINT `Partita_ibfk_2` FOREIGN KEY (`ID_Arbitro`) REFERENCES `Utente` (`ID_Utente`),
-  CONSTRAINT `Partita_ibfk_3` FOREIGN KEY (`ID_Casa`) REFERENCES `Squadra` (`ID_Squadra`),
-  CONSTRAINT `Partita_ibfk_4` FOREIGN KEY (`ID_Ospite`) REFERENCES `Squadra` (`ID_Squadra`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  CONSTRAINT `Partita_ibfk_1` FOREIGN KEY (`ID_Campionato`) REFERENCES `Campionato` (`ID_Campionato`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Partita_ibfk_2` FOREIGN KEY (`ID_Arbitro`) REFERENCES `Utente` (`ID_Utente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Partita_ibfk_3` FOREIGN KEY (`ID_Casa`) REFERENCES `Squadra` (`ID_Squadra`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Partita_ibfk_4` FOREIGN KEY (`ID_Ospite`) REFERENCES `Squadra` (`ID_Squadra`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,9 +137,9 @@ CREATE TABLE `Squadra` (
   PRIMARY KEY (`ID_Squadra`),
   KEY `Squadra_ibfk_1` (`ID_Allenatore`),
   KEY `Squadra_ibfk_2` (`ID_Campionato`),
-  CONSTRAINT `Squadra_ibfk_1` FOREIGN KEY (`ID_Allenatore`) REFERENCES `Utente` (`ID_Utente`),
-  CONSTRAINT `Squadra_ibfk_2` FOREIGN KEY (`ID_Campionato`) REFERENCES `Campionato` (`ID_Campionato`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  CONSTRAINT `Squadra_ibfk_1` FOREIGN KEY (`ID_Allenatore`) REFERENCES `Utente` (`ID_Utente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Squadra_ibfk_2` FOREIGN KEY (`ID_Campionato`) REFERENCES `Campionato` (`ID_Campionato`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,8 +156,9 @@ CREATE TABLE `Utente` (
   `Email` varchar(25) NOT NULL,
   `Password` varchar(25) NOT NULL,
   `Ruolo` char(1) NOT NULL,
-  PRIMARY KEY (`ID_Utente`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID_Utente`),
+  UNIQUE KEY `Email_UNIQUE` (`Email`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -169,4 +170,4 @@ CREATE TABLE `Utente` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-21 19:23:15
+-- Dump completed on 2017-02-01 11:28:00
