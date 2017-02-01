@@ -12,3 +12,14 @@ body {
 	margin-top: 16px;
 	margin-bottom: 16px;	
 }
+
+.jumbotron {
+	background: url('../imgs/logo.png') no-repeat center center;
+	background-size: 40%;
+}
+
+.jumbotron .container {
+	background-color: rgba(92, 184, 94, 0.5);
+	color: white;
+	border-radius: 35px;
+}
