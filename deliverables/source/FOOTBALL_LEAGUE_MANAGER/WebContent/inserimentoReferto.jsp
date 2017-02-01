@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<%@ include file="headData.html"%>
-<%@ page import="java.util.*, flm.giocatori.Giocatore"%>
-<%
-	Collection<?> rosaCasa = (Collection<?>) request.getAttribute("rosaCasa");
-	Collection<?> rosaOspite = (Collection<?>) request.getAttribute("rosaOspite");
-	int id_partita = (int) request.getAttribute("partita");
-%>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<title>Registrazione Referto</title>
+	<%@ include file="headData.html"%>
+	<%@ page import="java.util.*, flm.giocatori.Giocatore"%>
+	<%
+		Collection<?> rosaCasa = (Collection<?>) request.getAttribute("rosaCasa");
+		Collection<?> rosaOspite = (Collection<?>) request.getAttribute("rosaOspite");
+		int id_partita = (int) request.getAttribute("partita");
+	%>
+	<link href="css/jquery-ui.min.css" rel="stylesheet">
+	<link href="css/jquery-ui.theme.min.css" rel="stylesheet">
+	
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script src="js/datapicker.regional.IT.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	$(function() {
+		$.datepicker.setDefaults($.datepicker.regional["it"]);
+		$("#datepicker").datepicker();
+	} );
+	</script>	
+	<title>Registrazione Referto</title>
 </head>
 <body>
 	<div class="container">
@@ -33,7 +44,7 @@
 					<input type="hidden" name="action" value="inserimentoReferto">
 					<input type="hidden" name="partita" value="<%=id_partita%>">
 					<div class="input-group">
-						<input type="text" class="form-control" name="data" placeholder="Data partita">
+						<input type="text" class="form-control" name="data" placeholder="Data partita" id="datepicker">
 					</div>
 					<div id="accordion" role="tablist" aria-multiselectable="true">
 						<%
@@ -149,6 +160,5 @@
 			}
 		%>
 	</div>
-	<script type="text/javascript" src="js/insertRefertoCheck.js"></script>
 </body>
 </html>
