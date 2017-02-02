@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import flm.storage.DriverManagerConnectionPool;
 
 public class UtentiManager {
-	private static final String TABLE_UTENTI = "Utente";
+	public static final String TABLE_UTENTI = "Utente";
 	private static final String RUOLO_ADMIN = "A";
 	private static final String RUOLO_ALLENATORE = "T";
 	private static final String RUOLO_ARBITRO = "R";
