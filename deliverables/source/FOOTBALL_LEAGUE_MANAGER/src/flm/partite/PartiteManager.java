@@ -19,7 +19,7 @@ import flm.utenti.Arbitro;
 
 public class PartiteManager {
 	public static final String TABLE_PARTITE = "Partita";
-	private static final String TABLE_INFORMAZIONI = "Informazioni";
+	public static final String TABLE_INFORMAZIONI = "Informazioni";
 
 	public Collection<Partita> cercaPartite() throws SQLException {
 		Connection connection = null;
