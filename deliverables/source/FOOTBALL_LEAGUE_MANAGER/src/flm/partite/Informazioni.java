@@ -28,112 +28,112 @@ public class Informazioni {
 	}
 
 	/**
-	 * @return the id
+	 * @return l'id dell'informazione 
 	 */
 	public int getID() {
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id l'id da assegnare all'informazione
 	 */
 	public void setID(int id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the goal
+	 * @return i goal del giocatore
 	 */
 	public int getGoal() {
 		return goal;
 	}
 
 	/**
-	 * @param goal the goal to set
+	 * @param goal i goal da assegnare al giocatore
 	 */
 	public void setGoal(int goal) {
 		this.goal = goal;
 	}
 
 	/**
-	 * @return the assist
+	 * @return gli assist del giocatore
 	 */
 	public int getAssist() {
 		return assist;
 	}
 
 	/**
-	 * @param assist the assist to set
+	 * @param assist gli assist da assegnare al giocatore
 	 */
 	public void setAssist(int assist) {
 		this.assist = assist;
 	}
 
 	/**
-	 * @return the cartellino
+	 * @return il cartellino ricevuto dal giocatore
 	 */
 	public int getCartellino() {
 		return cartellino;
 	}
 
 	/**
-	 * @param cartellino the cartellino to set
+	 * @param cartellino il cartellino assegnato al giocatore
 	 */
 	public void setCartellino(int cartellino) {
 		this.cartellino = cartellino;
 	}
 
 	/**
-	 * @return the squalifica
+	 * @return il numero di giornate di squalifica
 	 */
 	public int getSqualifica() {
 		return squalifica;
 	}
 
 	/**
-	 * @param squalifica the squalifica to set
+	 * @param squalifica il numero di giornate di squalifica
 	 */
 	public void setSqualifica(int squalifica) {
 		this.squalifica = squalifica;
 	}
 
 	/**
-	 * @return the motivazione
+	 * @return la motivazione del cartellino
 	 */
 	public String getMotivazione() {
 		return motivazione;
 	}
 
 	/**
-	 * @param motivazione the motivazione to set
+	 * @param motivazione la motivazione del cartellino
 	 */
 	public void setMotivazione(String motivazione) {
 		this.motivazione = motivazione;
 	}
 
 	/**
-	 * @return the giocatore
+	 * @return il giocatore associato all'informazione
 	 */
 	public Giocatore getGiocatore() {
 		return giocatore;
 	}
 
 	/**
-	 * @param giocatore the giocatore to set
+	 * @param giocatore il giocatore da associare all'informazione
 	 */
 	public void setGiocatore(Giocatore giocatore) {
 		this.giocatore = giocatore;
 	}
 
 	/**
-	 * @return the partita
+	 * @return la partita associata all'informazione
 	 */
 	public Partita getPartita() {
 		return partita;
 	}
 	
 	/**
-	 * @param partita the partita to set
+	 * @param partita la partita da associare all'informazione
 	 */
 	public void setPartita(Partita partita) {
 		this.partita = partita;

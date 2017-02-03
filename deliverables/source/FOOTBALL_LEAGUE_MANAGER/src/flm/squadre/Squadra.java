@@ -39,140 +39,140 @@ public class Squadra {
 	}
 
 	/**
-	 * @return the id
+	 * @return l'id
 	 */
 	public int getID() {
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id l'id della squadra
 	 */
 	public void setID(int id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the nomeSquadra
+	 * @return il nome della squadra
 	 */
 	public String getNomeSquadra() {
 		return nomeSquadra;
 	}
 
 	/**
-	 * @param nomeSquadra the nomeSquadra to set
+	 * @param nomeSquadra il nome della squadra 
 	 */
 	public void setNomeSquadra(String nomeSquadra) {
 		this.nomeSquadra = nomeSquadra;
 	}
 
 	/**
-	 * @return the vittorie
+	 * @return le vittorie della squadra
 	 */
 	public int getVittorie() {
 		return vittorie;
 	}
 
 	/**
-	 * @param vittorie the vittorie to set
+	 * @param vittorie le vittorie da assegnare alla squadra
 	 */
 	public void setVittorie(int vittorie) {
 		this.vittorie = vittorie;
 	}
 
 	/**
-	 * @return the pareggi
+	 * @return i pareggi della squadra
 	 */
 	public int getPareggi() {
 		return pareggi;
 	}
 
 	/**
-	 * @param pareggi the pareggi to set
+	 * @param pareggi i pareggi da assegnare alla squadra
 	 */
 	public void setPareggi(int pareggi) {
 		this.pareggi = pareggi;
 	}
 
 	/**
-	 * @return the sconfitte
+	 * @return le sconfitte della squadra
 	 */
 	public int getSconfitte() {
 		return sconfitte;
 	}
 
 	/**
-	 * @param sconfitte the sconfitte to set
+	 * @param sconfitte le sconfitte da assegnare alla squadra
 	 */
 	public void setSconfitte(int sconfitte) {
 		this.sconfitte = sconfitte;
 	}
 
 	/**
-	 * @return the goalFatti
+	 * @return i goal fatti dalla squadra
 	 */
 	public int getGoalFatti() {
 		return goalFatti;
 	}
 
 	/**
-	 * @param goalFatti the goalFatti to set
+	 * @param goalFatti i goal fatti da assegnare alla squadra
 	 */
 	public void setGoalFatti(int goalFatti) {
 		this.goalFatti = goalFatti;
 	}
 
 	/**
-	 * @return the goalSubiti
+	 * @return i goal subiti dalla squadra
 	 */
 	public int getGoalSubiti() {
 		return goalSubiti;
 	}
 
 	/**
-	 * @param goalSubiti the goalSubiti to set
+	 * @param goalSubiti i goal subiti da assegnare alla squadra
 	 */
 	public void setGoalSubiti(int goalSubiti) {
 		this.goalSubiti = goalSubiti;
 	}
 
 	/**
-	 * @return the statoIscrizione
+	 * @return lo stato d'iscrizione della squadra
 	 */
 	public int getStatoIscrizione() {
 		return statoIscrizione;
 	}
 	
 	/**
-	 * set statoIscrizione to ATTESA_CONFERMA
+	 * imposta lo stato d'iIscrizione della squadra a ATTESA_CONFERMA
 	 */
 	public void iscriviSquadra() {
 		this.statoIscrizione = ATTESA_CONFERMA;
 	}
 	
 	/**
-	 * set statoIscrizione to SQUADRA_ISCRITTA
+	 * imposta lo stato d'iIscrizione della squadra a SQUADRA_ISCRITTA
 	 */
 	public void confermaSquadra() {
 		this.statoIscrizione = SQUADRA_ISCRITTA;
 	}
 		
 	/**
-	 * @param allenatore the allenatore to set
+	 * @param allenatore l'allenatore della squadra
 	 */
 	public void setAllenatore(Allenatore allenatore) {
 		this.allenatore = allenatore;
 	}
 
 	/**
-	 * @return the allenatore
+	 * @return l'allenatore della squadra
 	 */
 	public Allenatore getAllenatore() {
 		return allenatore;
 	}
 	
 	/**
-	 * @return the rosa
+	 * @return la rosa della squadra
 	 */
 	public Collection<Giocatore> getRosa() {
 		return rosa;
@@ -194,10 +194,18 @@ public class Squadra {
 			rosa.remove(giocatore);
 	}
 	
+	/**
+	 * 
+	 * @return il campionato a cui partecipa la squadra
+	 */
 	public Campionato getCampionato() {
 		return campionato;
 	}
-
+	
+	/**
+	 * 
+	 * @param campionato il campionato a cui partecipa la squadra
+	 */
 	public void setCampionato(Campionato campionato) {
 		this.campionato = campionato;
 	}
