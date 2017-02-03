@@ -18,7 +18,9 @@
 	<script type="text/javascript">
 	$(function() {
 		$.datepicker.setDefaults($.datepicker.regional["it"]);
-		$("#datepicker").datepicker();
+		$("#datepicker").datepicker({
+			maxDate:+0
+		});
 	} );
 	</script>	
 	<title>Registrazione Referto</title>
@@ -160,5 +162,6 @@
 			}
 		%>
 	</div>
+	<script type="text/javascript" src="js/insertRefertoCheck.js"></script>
 </body>
 </html>

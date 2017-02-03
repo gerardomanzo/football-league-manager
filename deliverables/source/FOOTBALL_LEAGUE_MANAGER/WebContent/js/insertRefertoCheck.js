@@ -24,12 +24,22 @@ function insertRefertoCheck(){
 			goal.style.borderColor = "red";
 			goal.focus;
 			return false;
+		}else if(isNaN(goal.value) || Number(goal.value)< 0){
+			alert("Deve essere un numero positivo");
+			goal.style.borderColor = "red";
+			goal.focus();
+			return false;
 		}
 		
 		if(assist == null || assist.value == "") {
 			alert("Non hai compilato un campo relativo al giocatore #"+(i+1));
 			assist.style.borderColor = "red";
 			assist.focus;
+			return false;
+		}else if(isNaN(assist.value) || Number(assist.value)<0){
+			alert("Deve essere un numero positivo");
+			assist.style.borderColor = "red";
+			assist.focus();
 			return false;
 		}
 		
@@ -44,6 +54,11 @@ function insertRefertoCheck(){
 			alert("Non hai compilato un campo relativo al giocatore #"+(i+1));
 			squalifica.style.borderColor = "red";
 			squalifica.focus;
+			return false;
+		}else if(isNaN(squalifica.value)||Number(squalifica.value)<1){
+			alert("Deve essere un numero positivo");
+			squalifica.style.borderColor = "red";
+			squalifica.focus();
 			return false;
 		}
 	}

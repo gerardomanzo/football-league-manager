@@ -13,5 +13,11 @@ function insertCampionatoCheck(){
 		document.creaCampionato.numSquadre.focus();
 		return false;
 	}
+	else if(isNaN(numSquadre)||Number(numSquadre)<=0){
+		alert("Deve essere un numero positivo");
+		document.creaCampionato.numSquadre.style.borderColor = "red";
+		document.creaCampionato.numSquadre.focus();
+		return false;
+	}
 	document.creaCampionato.submit();
 };

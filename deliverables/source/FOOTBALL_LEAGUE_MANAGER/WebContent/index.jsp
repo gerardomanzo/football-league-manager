@@ -47,5 +47,6 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/loginCheck.js"></script>
 </body>
 </html>
